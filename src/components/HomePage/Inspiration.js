@@ -8,13 +8,13 @@ const Inspiration = () => {
       <div className="cards-section">
         <h2>Inspiration for your next trip</h2>
         <div className="cards-row">
-          <div className="city-card north-west">
+          <div className="city-card radisson-blu-hotel">
             <img
-              src="https://s3-alpha-sig.figma.com/img/d5c1/6cba/8bc1958720a3d767d19d62a93cd1ff30?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C0Lyb4aos8pjrvvRGGzlY~MCbvauii1fp4jtdKLH~WH8FmLZlVs25us7d9AzOnVtaxmGTDAkXmCx1fS-CQzn5sXFBw~EdWDjp6J61G9gkurNMqM5LjhqKdPjB6wmkDscfp-5H8MHCrhnFV68I61IZWGSAP1a27H62nl291wSgxkgzIKAVhI5xBYdkmRnNTIHqQ13zRYoldV-87pPmetQQtRG6NeWO3KfURxRlbWrfLsqYyzb4CC7DGDcVR-qJveugU4oiYgZIRtFCqDClhBddzElphLgTgY1hqW3sWbhzxcJ~HChStJr4VIX4YKlYIHybnwAqw9GVza-mzFlTp0yzw__"
-              alt="Sandton City Hotel"
+              src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/427349706.jpg?k=c84fd64d2b29656c5122ae2a3081399cee39580b55ad553156aaacfdef6ecaec&o=&hp=1"
+              alt="Radisson Blu Hotel"
             />
             <div className="card-info">
-              <h3>North West</h3>
+              <h3>Radisson Blu Hotel</h3>
               <p>53 km away</p>
             </div>
           </div>
@@ -48,7 +48,7 @@ const Inspiration = () => {
               <p>34 km away</p>
             </div>
           </div>
-          <div className="city-card cape-town">
+          <div className="city-card pretoria">
             <img
               src="https://s3-alpha-sig.figma.com/img/d5c1/6cba/8bc1958720a3d767d19d62a93cd1ff30?Expires=1721001600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=C0Lyb4aos8pjrvvRGGzlY~MCbvauii1fp4jtdKLH~WH8FmLZlVs25us7d9AzOnVtaxmGTDAkXmCx1fS-CQzn5sXFBw~EdWDjp6J61G9gkurNMqM5LjhqKdPjB6wmkDscfp-5H8MHCrhnFV68I61IZWGSAP1a27H62nl291wSgxkgzIKAVhI5xBYdkmRnNTIHqQ13zRYoldV-87pPmetQQtRG6NeWO3KfURxRlbWrfLsqYyzb4CC7DGDcVR-qJveugU4oiYgZIRtFCqDClhBddzElphLgTgY1hqW3sWbhzxcJ~HChStJr4VIX4YKlYIHybnwAqw9GVza-mzFlTp0yzw__"
               alt="Hyde Park Hotel"
