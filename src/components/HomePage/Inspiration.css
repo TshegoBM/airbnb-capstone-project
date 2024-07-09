@@ -6,17 +6,22 @@
   box-sizing: border-box;
 }
 
+.inspiration-container {
+  text-align: center;
+}
+
 .cards-section {
   gap: 48px;
   padding: 96px;
 }
 
 .cards-section h2 {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  font-size: 30px;
+  text-align: left;
+  height: 44px;
+  font-size: 36px;
+  line-height: 44px;
   font-weight: 500;
+  margin-bottom: 50px;
 }
 
 .cards-row {
@@ -38,21 +43,28 @@
 .city-card img {
   width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 .card-info {
-  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 25px;
-  font-weight: 300;
-  line-height: 44px;
-  height: 244px;
+  text-align: left;
+  height: 100%;
+  border-radius: 8px;
 }
 
+.card-info h3{
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 44px;
+}
+
+.card-info p{
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
 .radisson-blu-hotel .card-info {
   background-color: #cc2d4a;
 }
