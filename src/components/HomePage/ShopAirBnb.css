@@ -1,0 +1,47 @@
+.shop-airbnb-section {
+    display:flex;
+    justify-content: center;
+    gap:48px;
+    padding: 40px 80px;
+    width:100%;
+    max-width: 1750px;
+  }
+  
+  .left-content {
+    width: 100%;
+    gap: 24px;
+    padding: 48px 0px;
+  }
+  
+  .left-content p {
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 500;
+    width: 377.78px;
+    height: 112px;
+    margin: 0 0 24px 0;
+    text-align: left;
+  }
+  
+  .left-content button {
+    display: flex;
+    justify-content: flex-start;
+    padding: 16px 24px;
+    gap:8px;
+    width: 135px;
+    height:56px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .gift-cards-image {
+   max-width: 854.22px;
+    height: 320px;
+    object-fit: cover;
+  }
+  
