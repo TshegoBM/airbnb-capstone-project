@@ -21,7 +21,7 @@ const Filter = () => {
         console.log('Searching with filters:', filters);
       };
   return (
-    <div className="search-bar-container">
+    <div className="filter-container">
       <div className="search-bar">
         <div className="search-section">
           <label>Hotels</label>
@@ -30,7 +30,7 @@ const Filter = () => {
             value={filters.location}
             onChange={handleChange}
           >
-            <option value="">Select a location</option>
+            <option value="">Select Hotel</option>
             <option value="local">Local</option>
             <option value="all">All locations</option>
           </select>
