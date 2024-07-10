@@ -6,6 +6,7 @@ import ShopAirBnb from './components/HomePage/ShopAirBnb';
 import Filter from './components/TopHeader/Filter';
 import ProfileSection from './components/TopHeader/ProfileSection'
 import QuestionsAboutHosting from './components/HomePage/QuestionsAboutHosting';
+import FutureGetaways from './components/HomePage/FutureGetaways';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <DiscoverExperiences />
       <ShopAirBnb /> 
       <QuestionsAboutHosting /> 
+      <FutureGetaways />
     </div>
   );
 }
