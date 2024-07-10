@@ -31,7 +31,6 @@
   .link-item {
     text-decoration: none; /* Remove default underline */
     font-size: 14px;
-    line-height: 1.2;
     font-weight: 500;
     color: inherit; /* Ensure the text color is inherited */
     cursor: pointer;
@@ -66,6 +65,7 @@
   .column {
     flex: 1;
     padding: 10px 0px; 
+    line-height:25px;
   }
   
   .column p {

@@ -7,6 +7,7 @@ import Filter from './components/TopHeader/Filter';
 import ProfileSection from './components/TopHeader/ProfileSection'
 import QuestionsAboutHosting from './components/HomePage/QuestionsAboutHosting';
 import FutureGetaways from './components/HomePage/FutureGetaways';
+import Footer from './components/HomePage/Footer';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <ShopAirBnb /> 
       <QuestionsAboutHosting /> 
       <FutureGetaways />
+      <Footer />
     </div>
   );
 }
