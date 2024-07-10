@@ -3,7 +3,7 @@ import "./ShopAirBnb.css";
 
 const ShopAirBnb = () => {
   return (
-    <div className="shop-airbnb-section">
+    <div className="shop-airbnb-container">
       <div className="left-content">
         <p>Shop Airbnb gift cards</p>
         <button>Learn more</button>

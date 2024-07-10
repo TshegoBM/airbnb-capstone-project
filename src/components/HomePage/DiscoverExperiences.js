@@ -3,7 +3,7 @@ import "./DiscoverExperiences.css";
 
 const DiscoverExperiences = () => {
   return (
-    <div className="experiences-container">
+    < div className="experiences-container">
       <h2>Discover Airbnb Experiences</h2>
       <div className="experiences-row">
         <div className="experiences-column">

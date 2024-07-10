@@ -5,6 +5,7 @@ import Inspiration from './components/HomePage/Inspiration';
 import ShopAirBnb from './components/HomePage/ShopAirBnb';
 import Filter from './components/TopHeader/Filter';
 import ProfileSection from './components/TopHeader/ProfileSection'
+import QuestionsAboutHosting from './components/HomePage/QuestionsAboutHosting';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
       <HeroBanner />
       <Inspiration />
       <DiscoverExperiences />
-      <ShopAirBnb />  
+      <ShopAirBnb /> 
+      <QuestionsAboutHosting /> 
     </div>
   );
 }
