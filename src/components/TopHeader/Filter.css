@@ -8,6 +8,16 @@
     background-color: black;
   }
   
+  .filter-container.black {
+    background-color: black;
+    color: white;
+  }
+  
+  .filter-container.white {
+    background-color: white;
+    color: black;
+  }
+  
   .search-bar {
     display: flex;
     background-color: white;
