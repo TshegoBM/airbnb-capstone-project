@@ -1,18 +1,18 @@
-// src/App.js
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import DiscoverExperiences from "./components/HomePage/DiscoverExperiences";
-import HeroBanner from "./components/HomePage/HeroBanner";
-import Inspiration from "./components/HomePage/Inspiration";
-import ShopAirBnb from "./components/HomePage/ShopAirBnb";
-import Filter from "./components/TopHeader/Filter";
-import ProfileSection from "./components/TopHeader/ProfileSection";
-import QuestionsAboutHosting from "./components/HomePage/QuestionsAboutHosting";
-import FutureGetaways from "./components/HomePage/FutureGetaways";
-import Footer from "./components/HomePage/Footer";
-import LocationsPage from "./components/LocationPage/LocationsPage";
-import LocationsDetails from "./components/LocationDetails/LocationsDetails";
-// import { FilterProvider } from './context/FilterContext';
+import DiscoverExperiences from "./components/Home/DiscoverExperiences";
+import HeroBanner from "./components/Home/HeroBanner";
+import Inspiration from "./components/Home/Inspiration";
+import ShopAirBnb from "./components/Home/ShopAirBnb";
+import Filter from "./components/Header/Filter";
+import ProfileSection from "./components/Header/ProfileSection";
+import QuestionsAboutHosting from "./components/Home/QuestionsAboutHosting";
+import FutureGetaways from "./components/Home/FutureGetaways";
+import Footer from "./components/Footer/Footer";
+import LocationsPage from "./components/LocationPage/LocationsCard";
+import LocationDetails from "./components/LocationDetails/LocationDetails";
+import Layout from "./components/Footer/Layout"; // Adjust the import path based on your project structure
+import Listing from "./components/Listing/Listing";
 
 function App() {
   return (
@@ -22,19 +22,24 @@ function App() {
         <Filter />
         <Switch>
           <Route path="/" exact>
-            <HeroBanner />
-            <Inspiration />
-            <DiscoverExperiences />
-            <ShopAirBnb />
-            <QuestionsAboutHosting />
-            <FutureGetaways />
-            <Footer />
+            <Layout>
+              <HeroBanner />
+              <Inspiration />
+              <DiscoverExperiences />
+              <ShopAirBnb />
+              <QuestionsAboutHosting />
+              <FutureGetaways />
+            </Layout>
           </Route>
           <Route path="/locations">
-            <LocationsPage />
+            <Layout>
+              <LocationsPage />
+            </Layout>
           </Route>
-          <Route path="/locationsdetails">
-          <LocationsDetails />
+          <Route path="/listing">
+            <Layout>
+              <Listing />
+            </Layout>
           </Route>
         </Switch>
       </Router>

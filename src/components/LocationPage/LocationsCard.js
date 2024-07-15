@@ -1,8 +1,8 @@
 import React from 'react'
-import './LocationsPage.css'
+import './LocationsCard.css'
 import LocationsResults from './LocationsResults'
 
-const LocationsPage = () => {
+const LocationsCard = () => {
   return (
     <div className='locationsPage'>
       <div className='locationsPage_info'>
@@ -70,4 +70,4 @@ const LocationsPage = () => {
   )
 }
 
-export default LocationsPage
+export default LocationsCard

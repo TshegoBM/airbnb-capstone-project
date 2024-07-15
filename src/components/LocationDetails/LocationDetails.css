@@ -1,0 +1,500 @@
+.location-details-container {
+  max-width: 1750px;
+  width: calc(100% - 350px); /* Consistent width calculation */
+  padding: 20px 0 0 0;
+  margin: 0 auto;
+  justify-content: center;
+  border-top: 1px solid #ccc;
+}
+
+.location-details {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;  */
+  width:100%; 
+}
+
+.details-header {
+  width: 1120px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.details-header h1 {
+  font-size: 26px; /* Adjusted for better match */
+  margin-bottom: 10px;
+}
+
+.details-header p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.image-section-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns, each taking up 50% of the container */
+  gap: 10px;
+}
+
+.small-images-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width:100%;
+  gap: 10px;
+}
+
+.main-image {
+  grid-column: 1/2;
+}
+
+.main-image img {
+  width: 100%;
+  height: 100%; /* Ensure the image takes up full height of its container */
+  object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
+  border-radius: 8px 0  0 8px;
+}
+
+.small-images {
+  grid-template-columns: repeat(2, 1fr);
+  gap:10px;
+}
+
+.small-images img {
+  width: 100%;
+  height: 100%; /* Ensure images take up full height of their grid cell */
+  object-fit: cover; /* Cover the entire grid cell while maintaining aspect ratio */
+
+}
+
+.small-images-row:nth-child(2) {
+  margin-top: 10px; /* Add a gap at the top of the second row */
+}
+
+.small-images-row:nth-child(2) img:nth-child(2) {
+  border-radius: 0 0 8px 0; /* Add a gap at the top of the second row */
+}
+
+.small-images-row:nth-child(1) img:nth-child(2) {
+  border-radius: 0 8px 0 0; /* Add a gap at the top of the second row */
+}
+
+.content-container {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  grid-gap: 100px; /* Adjust gap as needed */
+  padding: 40px 0 0 0;
+  margin: 0 auto;
+}
+
+.left-column{
+  grid-column: 1/2;
+}
+
+.right-column{
+  grid-column: 2/3;
+  display: flex;
+ justify-content: flex-end;
+}
+
+.listing-highlights {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 20px;
+}
+
+.highlight-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.highlight-icon {
+  font-size: 24px; 
+}
+
+.highlight-heading {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+}
+
+.highlight-heading p.hosted-by {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.highlight-heading p.details {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 24px;
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.highlight h3 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.highlight p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6B7280;
+}
+.highlight-details-container {
+  margin-top: 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* .listing-description {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.listing-description p {
+  margin-bottom: 10px;
+} */
+
+.show-more-button {
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.show-more-button:hover {
+  cursor: pointer;
+} 
+
+/* Styles for the listing overview section */
+.listing-overview {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+
+/* Styles for the sleeping arrangements section */
+.sleeping-arrangements {
+ 
+  width: 670px;
+  gap: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+.sleeping-arrangements__image {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 320px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.sleeping-arrangements__details {
+  margin-top: 8px;
+}
+
+.sleeping-arrangements h2 {
+  margin-bottom: 24px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.sleeping-arrangements__details h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.sleeping-arrangements p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+
+}
+
+/* Styles for the amenities section */
+.amenities-section {
+display: flex;
+align-items: flex-start;
+flex-direction: column;
+text-align: left;
+margin-bottom: 20px;
+border-bottom: 1px solid #ccc;
+}
+
+.amenities-section h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+}
+.amenities-grid-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 8px;
+}
+.amenities-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+.amenity-item p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+
+.show-all-button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  border: 1px solid black;
+  cursor: pointer;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.show-all-button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the booking calendar section */
+.booking-calendar-section {
+  width: 100%;
+  height: 100%;
+  max-height: 452px;
+  margin-bottom: 32px;
+}
+
+.booking-calendar-section h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: left;
+}
+
+.booking-calendar-section p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6B7280;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.booking-calendar {
+  display: flex;
+  gap: 32px;
+  overflow: hidden;
+}
+
+.month {
+  display: flex;
+  height: auto;
+  width: 100%;
+  flex-direction: column;
+  
+}
+
+.month h3 {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.weekdays, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+
+.weekdays span {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+}
+
+.days span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #D1D5DB;
+  margin-bottom: 8px;
+}
+
+.weekdays span, .days span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+}
+
+.days span.active {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.clear-dates-button {
+  margin-top: 16px;
+  padding: 8px 16px;
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-dates-button:hover {
+  background-color: #ff6176;
+}
+
+/* Styles for the reservation summary section */
+.reservation-card {
+  /* width: calc(100% - 250px);  */
+  width: 370px;
+  height: 564px;
+  box-shadow: 0 6px 18px -9px rgba(0, 0, 0, 0.75);
+  padding: 24px;
+  /* margin: 0 auto; */
+  /* width: 50%; */
+  border-radius: 8px;
+  background-color: white;
+  gap: 16px;
+}
+
+.reservation-summary {
+  width: 35%;
+  padding: 24px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white; /* Added background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for better visibility */
+}
+
+.price-info {
+  border-bottom: 1px solid #ddd;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+/* .price-info h2 {
+  font-size: 24px;
+    margin-bottom: 10px;
+} */
+
+.reservation-summary .price-info h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.price-info p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.booking-info {
+  margin-bottom: 20px;
+}
+
+.date-picker,
+.guests-picker {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.date-picker label,
+.guests-picker label {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #888;
+}
+
+.date-picker input,
+.guests-picker select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.reserve-button {
+  display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+}
+
+.reserve-button:hover {
+  background-color: #ff6176;
+}
+
+.price-breakdown {
+  font-size: 14px;
+  color: #555;
+}
+
+.price-breakdown p {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.price-breakdown hr {
+  margin: 10px 0;
+}
+
+.price-breakdown h3 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin: 10px 0 0 0;
+}
+
+
