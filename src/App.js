@@ -13,15 +13,16 @@ import LocationsPage from "./components/LocationPage/LocationsCard";
 import LocationDetails from "./components/LocationDetails/LocationDetails";
 import Layout from "./components/Footer/Layout"; // Adjust the import path based on your project structure
 import Listing from "./components/Listing/Listing";
+import LoginPage from "./components/Admin/LoginPage";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <ProfileSection />
-        <Filter />
         <Switch>
           <Route path="/" exact>
+            <ProfileSection />
+            <Filter />
             <Layout>
               <HeroBanner />
               <Inspiration />
@@ -32,14 +33,21 @@ function App() {
             </Layout>
           </Route>
           <Route path="/locations">
+          <ProfileSection />
+            <Filter />
             <Layout>
               <LocationsPage />
             </Layout>
           </Route>
           <Route path="/listing">
+          <ProfileSection />
+            <Filter />
             <Layout>
               <Listing />
             </Layout>
+          </Route>
+          <Route path="/login">
+            <LoginPage />
           </Route>
         </Switch>
       </Router>
