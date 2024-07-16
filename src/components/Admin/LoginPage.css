@@ -17,12 +17,8 @@
   
   .login-form {
     width: 100%; 
-   flex: 1;
-    display: flex;
+    flex: 1;
     flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
   }
   
   .login-form h2 {

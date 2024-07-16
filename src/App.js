@@ -14,6 +14,7 @@ import LocationDetails from "./components/LocationDetails/LocationDetails";
 import Layout from "./components/Footer/Layout"; // Adjust the import path based on your project structure
 import Listing from "./components/Listing/Listing";
 import LoginPage from "./components/Admin/LoginPage";
+import CreateListings from "./components/Admin/CreateListings";
 
 function App() {
   return (
@@ -48,6 +49,9 @@ function App() {
           </Route>
           <Route path="/login">
             <LoginPage />
+          </Route>
+          <Route path="/createlisting">
+            <CreateListings />
           </Route>
         </Switch>
       </Router>
