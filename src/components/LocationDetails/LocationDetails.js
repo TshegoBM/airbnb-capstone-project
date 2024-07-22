@@ -286,19 +286,39 @@ const LocationDetails = () => {
               Reserve
             </button>
             <div className="price-breakdown">
-              <p>
-                ${nightlyRate} x{" "}
-                {(new Date(checkOutDate) - new Date(checkInDate)) /
-                  (1000 * 60 * 60 * 24) || 0}{" "}
-                nights: $
-                {nightlyRate *
-                  ((new Date(checkOutDate) - new Date(checkInDate)) /
-                    (1000 * 60 * 60 * 24)) || 0}
-              </p>
-              <p>Weekly discount: -${weeklyDiscount}</p>
-              <p>Cleaning fee: ${cleaningFee}</p>
-              <p>Service fee: ${serviceFee}</p>
-              <p>Occupancy taxes and fees: ${taxesAndFees}</p>
+              <div class="fees">
+                <p>
+                  <span class="rate">${nightlyRate} x 
+                    {(new Date(checkOutDate) - new Date(checkInDate)) /
+                      (1000 * 60 * 60 * 24) || 0}{" "}
+                    nights
+                  </span>
+                  <span class="total">
+                    $
+                    {nightlyRate *
+                      ((new Date(checkOutDate) - new Date(checkInDate)) /
+                        (1000 * 60 * 60 * 24)) || 0}
+                  </span>
+                </p>
+
+                <p>
+                  <span class="label">Weekly discount:</span>{" "}
+                  <span class="amount">-${weeklyDiscount}</span>
+                </p>
+                <p>
+                  <span class="label">Cleaning fee:</span>{" "}
+                  <span class="amount">${cleaningFee}</span>
+                </p>
+                <p>
+                  <span class="label">Service fee:</span>{" "}
+                  <span class="amount">${serviceFee}</span>
+                </p>
+                <p>
+                  <span class="label">Occupancy taxes and fees:</span>{" "}
+                  <span class="amount">${taxesAndFees}</span>
+                </p>
+              </div>
+
               <hr />
               <h3>Total: ${totalPrice}</h3>
             </div>

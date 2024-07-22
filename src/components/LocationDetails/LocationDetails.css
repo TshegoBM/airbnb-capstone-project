@@ -570,3 +570,35 @@
   color: #ff385c;
   margin-right: 4px;
 }
+
+.fees p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  margin-right: 10px; 
+}
+
+.amount {
+  margin-left: 10px; 
+}
+
+.pricing-details {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+}
+
+.rate, .nights, .total {
+  margin-right: 5px; /* Adjust spacing as needed */
+}
+
+.nights {
+  margin: 0 10px; /* Add space around the number of nights */
+}
+
+.total {
+  font-weight: bold; /* Optional: make the total amount stand out */
+}
+
+
