@@ -12,6 +12,7 @@
   width: 100%;
 }
 
+/* Header styles for the location details */
 .details-header {
   max-width: 1120px;
   text-align: left;
@@ -28,7 +29,7 @@
   font-size: 16px;
 }
 
-/* Styles for the images */
+/* Styles for the images section*/
 .image-section-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -79,6 +80,7 @@
   border-radius: 0 8px 0 0;
 }
 
+/* Styles for the content-container*/
 .content-container {
   display: grid;
   grid-template-columns: 6fr 4fr;
@@ -87,14 +89,10 @@
   margin: 0 auto;
 }
 
+/* Styles for the left column */
 .left-column {
   max-width: 1120px;
   width: 100%;
-}
-
-.right-column {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .listing-highlights {
@@ -174,6 +172,7 @@
   border-bottom: 1px solid #ccc;
 }
 
+/* Styles for the sleeping arrangements section */
 .sleeping-arrangements {
   width: 670px;
   gap: 24px;
@@ -211,6 +210,7 @@
   margin-bottom: 20px;
 }
 
+/* Styles for the amenities section */
 .amenities-section {
   width: 100%;
   display: flex;
@@ -361,6 +361,11 @@
   background-color: #ff6176;
 }
 
+/* Styles for the right column */
+.right-column {
+  display: flex;
+  justify-content: flex-end;
+}
 /* Styles for the reservation section */
 .reservation-card {
   width: 370px;
