@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LocationDetails.css";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
@@ -6,20 +6,55 @@ import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
 import AdjustOutlinedIcon from "@mui/icons-material/AdjustOutlined";
 import AirOutlinedIcon from "@mui/icons-material/AirOutlined";
 import KitchenOutlinedIcon from "@mui/icons-material/KitchenOutlined";
-import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import ShowerOutlinedIcon from "@mui/icons-material/ShowerOutlined";
+import DiningOutlinedIcon from "@mui/icons-material/DiningOutlined";
+import PetsOutlinedIcon from "@mui/icons-material/PetsOutlined";
+import LocalLaundryServiceOutlinedIcon from "@mui/icons-material/LocalLaundryServiceOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PedalBikeOutlinedIcon from "@mui/icons-material/PedalBikeOutlined";
+import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DoorFrontOutlinedIcon from "@mui/icons-material/DoorFrontOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
-import { WifiOutlined } from "@mui/icons-material";
 
-const LocationsDetails = () => {
+const LocationDetails = () => {
   const accommodationType = "Private Room"; // Example accommodation type
   const starRating = 4.5; // Example star rating
   const numberOfReviews = 120; // Example number of reviews
   const imageUrl =
     "https://s3-alpha-sig.figma.com/img/33e7/8912/bbfb42ca5051f5492bcbda4a216dccc6?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PFF62WOwsIHqviChCXSdT62KWnoexOHuMkGZpzRKJ4TNDDXuNJySwoT3N~RXG3DDxZoRZEfBsnhroT4xNXIYiv43Fe30DtihkED5qRe7LQzf2jnqO68dScr~im7ksxFPaDEBw~mR0sE854dvMx-lWLYK~oeHAQLpwmjfYZxf2EdczbNtRESR8O~47a9OyUo95LKGYrwoODLyzjC1n02FSUhz-tHKPGbVlAj3bKMSj5QMf74nJPXUepVwOZDYNE-EZdl4n1LrhaATtvvIwG4wWjjZVtLeT1d9~gB8E8Xwzk4MFGhrWSgvUAvBY2DjvZDTJn4ZGeAqnOKap1pafEVR-A__";
+
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [guests, setGuests] = useState(2);
+  const nightlyRate = 75;
+  const weeklyDiscount = 28;
+  const discount = 28;
+  const cleaningFee = 62;
+  const serviceFee = 83;
+  const taxesAndFees = 29;
+
+  const calculateTotalPrice = () => {
+    const nights =
+      (new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24);
+    if (isNaN(nights) || nights <= 0) {
+      return 0;
+    }
+    const total =
+      nightlyRate * nights - discount + cleaningFee + serviceFee + taxesAndFees;
+    return total;
+  };
+
+  const totalPrice = calculateTotalPrice();
+
+  const handleReserve = () => {
+    if (checkInDate && checkOutDate && guests) {
+      alert(
+        `Reservation made from ${checkInDate} to ${checkOutDate} for ${guests} guests.`
+      );
+    } else {
+      alert("Please fill in all fields to make a reservation.");
+    }
+  };
 
   return (
     <div className="location-details-container">
@@ -35,12 +70,12 @@ const LocationsDetails = () => {
             <img src={imageUrl} alt="Main Image" />
           </div>
           <div className="small-images">
-            <div className='small-images-row'>
-            <img src={imageUrl} alt="Small Image 1" />
+            <div className="small-images-row">
+              <img src={imageUrl} alt="Small Image 1" />
               <img src={imageUrl} alt="Small Image 2" />
             </div>
             <div className="small-images-row">
-            <img src={imageUrl} alt="Small Image 3" />
+              <img src={imageUrl} alt="Small Image 3" />
               <img src={imageUrl} alt="Small Image 4" />
             </div>
           </div>
@@ -139,19 +174,24 @@ const LocationsDetails = () => {
               </div>
               <div className="amenities-grid">
                 <div className="amenity-item">
-                  <span>🍽️</span> Kitchen
+                  <DiningOutlinedIcon />
+                  <p>Kitchen</p>
                 </div>
                 <div className="amenity-item">
-                  <span>🐶</span> Pets allowed
+                  <PetsOutlinedIcon />
+                  <p>Pets allowed</p>
                 </div>
                 <div className="amenity-item">
-                  <span>🔥</span> Dryer
+                  <LocalLaundryServiceOutlinedIcon />
+                  <p>Dryer</p>
                 </div>
                 <div className="amenity-item">
-                  <span>📹</span> Security cameras on property
+                  <SecurityOutlinedIcon />
+                  <p>Security cameras on property</p>
                 </div>
                 <div className="amenity-item">
-                  <span>🚴‍♂️</span> Bicycles
+                  <PedalBikeOutlinedIcon />
+                  <p>Bicycles</p>
                 </div>
               </div>
             </div>
@@ -209,34 +249,58 @@ const LocationsDetails = () => {
         <div className="right-column">
           <div className="reservation-card">
             <div className="price-info">
-              <h2>$75 / night</h2>
+              <h2>${nightlyRate} / night</h2>
               <p>
-                <StarRateIcon /> 5.0 · 7 reviews
+                <StarRateIcon /> {starRating} · {numberOfReviews} reviews
               </p>
             </div>
             <div className="booking-info">
               <div className="date-picker">
                 <label>Check-in</label>
-                <input type="date" />
+                <input
+                  type="date"
+                  value={checkInDate}
+                  onChange={(e) => setCheckInDate(e.target.value)}
+                />
                 <label>Check-out</label>
-                <input type="date" />
+                <input
+                  type="date"
+                  value={checkOutDate}
+                  onChange={(e) => setCheckOutDate(e.target.value)}
+                />
               </div>
               <div className="guests-picker">
                 <label>Guests</label>
-                <select>
+                <select
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                >
+                  <option>1 guest</option>
                   <option>2 guests</option>
+                  <option>3 guests</option>
+                  <option>4 guests</option>
                 </select>
               </div>
             </div>
-            <button className="reserve-button">Reserve</button>
+            <button className="reserve-button" onClick={handleReserve}>
+              Reserve
+            </button>
             <div className="price-breakdown">
-              <p>$79 x 7 nights: $555</p>
-              <p>Weekly discount: -$28</p>
-              <p>Cleaning fee: $62</p>
-              <p>Service fee: $83</p>
-              <p>Occupancy taxes and fees: $29</p>
+              <p>
+                ${nightlyRate} x{" "}
+                {(new Date(checkOutDate) - new Date(checkInDate)) /
+                  (1000 * 60 * 60 * 24) || 0}{" "}
+                nights: $
+                {nightlyRate *
+                  ((new Date(checkOutDate) - new Date(checkInDate)) /
+                    (1000 * 60 * 60 * 24)) || 0}
+              </p>
+              <p>Weekly discount: -${weeklyDiscount}</p>
+              <p>Cleaning fee: ${cleaningFee}</p>
+              <p>Service fee: ${serviceFee}</p>
+              <p>Occupancy taxes and fees: ${taxesAndFees}</p>
               <hr />
-              <h3>Total: $701</h3>
+              <h3>Total: ${totalPrice}</h3>
             </div>
           </div>
         </div>
@@ -245,4 +309,4 @@ const LocationsDetails = () => {
   );
 };
 
-export default LocationsDetails;
+export default LocationDetails;

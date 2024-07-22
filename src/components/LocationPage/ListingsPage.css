@@ -1,0 +1,69 @@
+.listings-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .listings-header {
+    font-size: 24px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 20px;
+  }
+  
+  .listings-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .listing-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .listing-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .listing-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .listing-info {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .listing-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .listing-description,
+  .listing-rooms,
+  .listing-amenities,
+  .listing-rating,
+  .listing-price {
+    font-size: 14px;
+    color: #6B7280;
+    margin: 8px 0;
+  }
+  

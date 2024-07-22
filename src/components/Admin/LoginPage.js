@@ -1,18 +1,43 @@
 import React, { useState } from "react";
-import "./LoginPage.css"; // Import your CSS file for styling
+import { useHistory } from 'react-router-dom'; 
+import axios from 'axios';
+import "./LoginPage.css"; 
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const history = useHistory();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission logic here (e.g., authentication)
-    console.log(`Username: ${username}, Password: ${password}`);
-    // Reset form fields after submission if needed
+
+    try {
+      const response = await axios.post('http://localhost:3000/login', {
+        username,
+        password
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+      
+    });
+
+    console.log(response.data)
+
+    if (response.data.message === 'Login successful') {
+    setMessage('Great! Your login was successful!');
+    history.push('/locations');
+    } else {
+      setMessage("Oops! Login failed. Please try again.");
+    }
     setUsername("");
     setPassword("");
-  };
+  } catch (error) {
+    console.error("Login error:", error);
+    setMessage("Oops! Login failed. Please try again.");
+  }
+};
 
   return (
     <div className="login-container">

@@ -10,10 +10,10 @@
 /* Style for the main container */
 .hosting-container {
   position: relative;
-  width: calc(100% - 160px); /* 100% width minus 80px left and right padding */
+  width: calc(100% - 160px); 
   max-width: 1750px; 
-  height: 640px; 
-  border-radius: 8px; /* Border radius as per design */
+  height: 800px; 
+  border-radius: 8px; 
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -30,13 +30,17 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  border-radius: 8px; 
+  object-position: center 60%; 
 }
 
 /* Style for the content container */
 .hosting-content {
   position: relative;
   z-index: 1;
-  padding: 0 24px; /* Padding for inner content */
+  padding: 0 24px; 
+  width: 465px;
+  height:288px;
 }
 
 /* Style for the heading */
@@ -51,20 +55,23 @@
 
 /* Style for the button */
 .hosting-content button {
-  width: 174px; /* Fixed width */
-  height: 56px; /* Fixed height */
-  padding: 16px 24px; /* Padding */
-  gap: 8px; /* Gap */
-  border: none; /* No border */
-  border-radius: 8px 0 0 0; /* Border radius */
-  background-color: #ff385c; /* Background color */
-  color: white; /* Text color */
-  font-size: 16px; /* Font size */
-  font-weight: 500; /* Font weight */
-  cursor: pointer; /* Pointer cursor */
-  transition: background-color 0.3s ease; /* Transition effect */
+  display: flex;
+  width: 174px; 
+  height: 56px; 
+  padding: 16px 24px; 
+  gap: 8px;
+  border: none; 
+  border-radius: 8px ; 
+  background-color: white; 
+  color: black; 
+  font-size: 16px; 
+  font-weight: 500; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+  align-items: self-start;
 }
 
 .hosting-content button:hover {
-  background-color: #e60023; /* Hover background color */
+  background-color: red; 
+  color:white;
 }

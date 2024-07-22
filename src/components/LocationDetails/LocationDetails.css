@@ -1,6 +1,7 @@
+/* Main container for the location details */
 .location-details-container {
   max-width: 1750px;
-  width: calc(100% - 350px); /* Consistent width calculation */
+  width: calc(100% - 350px);
   padding: 20px 0 0 0;
   margin: 0 auto;
   justify-content: center;
@@ -8,20 +9,17 @@
 }
 
 .location-details {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;  */
-  width:100%; 
+  width: 100%;
 }
 
 .details-header {
-  width: 1120px;
+  max-width: 1120px;
   text-align: left;
   margin-bottom: 20px;
 }
 
 .details-header h1 {
-  font-size: 26px; /* Adjusted for better match */
+  font-size: 26px;
   margin-bottom: 10px;
 }
 
@@ -30,16 +28,16 @@
   font-size: 16px;
 }
 
-.image-section-container{
+/* Styles for the images */
+.image-section-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns, each taking up 50% of the container */
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 
 .small-images-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  width:100%;
   gap: 10px;
 }
 
@@ -47,53 +45,56 @@
   grid-column: 1/2;
 }
 
-.main-image img {
+.main-image img,
+.small-images img {
   width: 100%;
-  height: 100%; /* Ensure the image takes up full height of its container */
-  object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
-  border-radius: 8px 0  0 8px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-image img {
+  border-radius: 8px 0 0 8px;
 }
 
 .small-images {
   grid-template-columns: repeat(2, 1fr);
-  gap:10px;
+  gap: 10px;
 }
 
 .small-images img {
   width: 100%;
-  height: 100%; /* Ensure images take up full height of their grid cell */
-  object-fit: cover; /* Cover the entire grid cell while maintaining aspect ratio */
-
+  height: 100%;
+  object-fit: cover;
 }
 
 .small-images-row:nth-child(2) {
-  margin-top: 10px; /* Add a gap at the top of the second row */
+  margin-top: 10px;
 }
 
 .small-images-row:nth-child(2) img:nth-child(2) {
-  border-radius: 0 0 8px 0; /* Add a gap at the top of the second row */
+  border-radius: 0 0 8px 0;
 }
 
 .small-images-row:nth-child(1) img:nth-child(2) {
-  border-radius: 0 8px 0 0; /* Add a gap at the top of the second row */
+  border-radius: 0 8px 0 0;
 }
 
 .content-container {
   display: grid;
   grid-template-columns: 6fr 4fr;
-  grid-gap: 100px; /* Adjust gap as needed */
+  grid-gap: 100px;
   padding: 40px 0 0 0;
   margin: 0 auto;
 }
 
-.left-column{
-  grid-column: 1/2;
+.left-column {
+  max-width: 1120px;
+  width: 100%;
 }
 
-.right-column{
-  grid-column: 2/3;
+.right-column {
   display: flex;
- justify-content: flex-end;
+  justify-content: flex-end;
 }
 
 .listing-highlights {
@@ -108,11 +109,10 @@
 .highlight-container {
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
 .highlight-icon {
-  font-size: 24px; 
+  font-size: 24px;
 }
 
 .highlight-heading {
@@ -151,35 +151,22 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #6B7280;
+  color: #6b7280;
 }
+
 .highlight-details-container {
   margin-top: 24px;
   border-bottom: 1px solid #ccc;
 }
 
-/* .listing-description {
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.listing-description p {
-  margin-bottom: 10px;
-} */
-
 .show-more-button {
   text-decoration: underline;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
-.show-more-button:hover {
-  cursor: pointer;
-} 
-
-/* Styles for the listing overview section */
 .listing-overview {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -187,10 +174,7 @@
   border-bottom: 1px solid #ccc;
 }
 
-
-/* Styles for the sleeping arrangements section */
 .sleeping-arrangements {
- 
   width: 670px;
   gap: 24px;
   margin-bottom: 32px;
@@ -201,9 +185,7 @@
 .sleeping-arrangements__image {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 320px;
-  height: auto;
   border-radius: 8px;
 }
 
@@ -227,17 +209,15 @@
   font-size: 14px;
   color: #555;
   margin-bottom: 20px;
-
 }
 
-/* Styles for the amenities section */
 .amenities-section {
-display: flex;
-align-items: flex-start;
-flex-direction: column;
-text-align: left;
-margin-bottom: 20px;
-border-bottom: 1px solid #ccc;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 .amenities-section h2 {
@@ -245,13 +225,14 @@ border-bottom: 1px solid #ccc;
   font-size: 24px;
   line-height: 32px;
 }
+
 .amenities-grid-container {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
   gap: 8px;
 }
+
 .amenities-grid {
   flex: 1;
   display: flex;
@@ -262,25 +243,23 @@ border-bottom: 1px solid #ccc;
 .amenity-item {
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
 }
+
 .amenity-item p {
   font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 32px;
 }
-
 
 .show-all-button {
   margin-top: 16px;
   padding: 8px 16px;
   background-color: white;
   color: black;
-  border: none;
-  border-radius: 8px;
   border: 1px solid black;
+  border-radius: 8px;
   cursor: pointer;
-  gap: 8px;
   margin-bottom: 20px;
 }
 
@@ -288,10 +267,9 @@ border-bottom: 1px solid #ccc;
   background-color: #0056b3;
 }
 
-/* Styles for the booking calendar section */
+/* Booking calendar section */
 .booking-calendar-section {
   width: 100%;
-  height: 100%;
   max-height: 452px;
   margin-bottom: 32px;
 }
@@ -307,7 +285,7 @@ border-bottom: 1px solid #ccc;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #6B7280;
+  color: #6b7280;
   margin-bottom: 16px;
   text-align: left;
 }
@@ -320,10 +298,8 @@ border-bottom: 1px solid #ccc;
 
 .month {
   display: flex;
-  height: auto;
-  width: 100%;
   flex-direction: column;
-  
+  width: 100%;
 }
 
 .month h3 {
@@ -332,14 +308,14 @@ border-bottom: 1px solid #ccc;
   line-height: 28px;
 }
 
-.weekdays, .days {
+.weekdays,
+.days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
   margin-bottom: 8px;
   width: 100%;
 }
-
 
 .weekdays span {
   font-weight: 600;
@@ -352,11 +328,12 @@ border-bottom: 1px solid #ccc;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: #D1D5DB;
+  color: #d1d5db;
   margin-bottom: 8px;
 }
 
-.weekdays span, .days span {
+.weekdays span,
+.days span {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -384,15 +361,12 @@ border-bottom: 1px solid #ccc;
   background-color: #ff6176;
 }
 
-/* Styles for the reservation summary section */
+/* Styles for the reservation section */
 .reservation-card {
-  /* width: calc(100% - 250px);  */
   width: 370px;
-  height: 564px;
+  height: 30;
   box-shadow: 0 6px 18px -9px rgba(0, 0, 0, 0.75);
   padding: 24px;
-  /* margin: 0 auto; */
-  /* width: 50%; */
   border-radius: 8px;
   background-color: white;
   gap: 16px;
@@ -403,20 +377,15 @@ border-bottom: 1px solid #ccc;
   padding: 24px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: white; /* Added background color */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for better visibility */
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .price-info {
   border-bottom: 1px solid #ddd;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 }
-
-/* .price-info h2 {
-  font-size: 24px;
-    margin-bottom: 10px;
-} */
 
 .reservation-summary .price-info h2 {
   font-size: 24px;
@@ -444,31 +413,28 @@ border-bottom: 1px solid #ccc;
 
 .date-picker label,
 .guests-picker label {
-    margin-bottom: 5px;
-    font-size: 12px;
-    color: #888;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #888;
 }
 
 .date-picker input,
 .guests-picker select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-
 
 .reserve-button {
   display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #ff385c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 20px;
-
+  width: 100%;
+  padding: 10px;
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .reserve-button:hover {
@@ -476,18 +442,12 @@ border-bottom: 1px solid #ccc;
 }
 
 .price-breakdown {
-  font-size: 14px;
-  color: #555;
-}
-
-.price-breakdown p {
-  display: flex;
-  justify-content: space-between;
-  margin: 8px 0;
-}
-
-.price-breakdown hr {
   margin: 10px 0;
+  font-weight: 400px;
+  font-size: 16px;
+  text-align: left;
+  line-height: 24px;
+  margin-bottom: 10px;
 }
 
 .price-breakdown h3 {
@@ -497,4 +457,111 @@ border-bottom: 1px solid #ccc;
   margin: 10px 0 0 0;
 }
 
+.right-column-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  margin-top: 40px;
+}
 
+.right-column__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.guest-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.guest-counter {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.counter-button {
+  padding: 4px 8px;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.counter-button:hover {
+  background-color: #ddd;
+}
+
+.counter-value {
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.review-section {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.review-section__header {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.review-card__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.review-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.review-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-card__name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.review-card__date {
+  font-size: 12px;
+  color: #888;
+}
+
+.review-card__content {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.review-card__rating {
+  display: flex;
+  align-items: center;
+}
+
+.star-icon {
+  font-size: 14px;
+  color: #ff385c;
+  margin-right: 4px;
+}

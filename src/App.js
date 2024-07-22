@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./App.css";
 import DiscoverExperiences from "./components/Home/DiscoverExperiences";
 import HeroBanner from "./components/Home/HeroBanner";
@@ -8,13 +8,12 @@ import Filter from "./components/Header/Filter";
 import ProfileSection from "./components/Header/ProfileSection";
 import QuestionsAboutHosting from "./components/Home/QuestionsAboutHosting";
 import FutureGetaways from "./components/Home/FutureGetaways";
-import Footer from "./components/Footer/Footer";
-import LocationsPage from "./components/LocationPage/LocationsCard";
-import LocationDetails from "./components/LocationDetails/LocationDetails";
 import Layout from "./components/Footer/Layout"; // Adjust the import path based on your project structure
 import Listing from "./components/Listing/Listing";
 import LoginPage from "./components/Admin/LoginPage";
 import CreateListings from "./components/Admin/CreateListings";
+import LocationsPage from "./components/LocationPage/LocationsPage";
+import ListingsPage from "./components/LocationPage/ListingsPage"; // Ensure this path is correct
 
 function App() {
   return (
@@ -33,24 +32,33 @@ function App() {
               <FutureGetaways />
             </Layout>
           </Route>
-          <Route path="/locations">
-          <ProfileSection />
+          
+          <Route path="/locations" exact>
+            <ProfileSection />
             <Filter />
             <Layout>
               <LocationsPage />
             </Layout>
           </Route>
-          <Route path="/listing">
-          <ProfileSection />
+
+          <Route path="/listings">
+            <ProfileSection />
+            <Filter />
+              <ListingsPage />
+          </Route>
+
+          <Route path="/listing" exact>
+            <ProfileSection />
             <Filter />
             <Layout>
               <Listing />
             </Layout>
           </Route>
-          <Route path="/login">
+          
+          <Route path="/login" exact>
             <LoginPage />
           </Route>
-          <Route path="/createlisting">
+          <Route path="/createlisting" exact>
             <CreateListings />
           </Route>
         </Switch>

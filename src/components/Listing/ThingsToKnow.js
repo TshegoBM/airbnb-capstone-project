@@ -33,7 +33,7 @@ const ThingsToKnow = () => {
           <div className="health-safety">
             <h4>Health & safety</h4>
             <ul>
-              <li><CleanHandsIcon /> Committed to Airbnb's enhanced cleaning process. <a href="#">Show more</a></li>
+              <li><CleanHandsIcon /> Committed to Airbnb's enhanced cleaning process.<strong>Show more</strong></li>
               <li><VerifiedUserIcon /> Airbnb's social-distancing and other COVID-19-related guidelines apply</li>
               <li><ReportProblemIcon /> Carbon monoxide alarm</li>
               <li><ReportProblemIcon /> Smoke alarm</li>

@@ -31,13 +31,18 @@
     align-items: center;
     font-weight: 400;
     gap: 24px;
+    font-size: 16px;
     padding-left: 10%;
     font-weight: 400;
     line-height: 24px;
   }
+
+  
   
   .header_right {
     display: flex;
+    font-size: 14px;
+    line-height: 20px;
     font-weight: 500;
     align-items: center;
     gap: 24px;
@@ -80,7 +85,7 @@
 
   .dropbtn:hover{
     cursor: pointer;
-    background-color: rgb(130, 128, 128);
+    background-color: #E5E7EB;
   }
   
   .dropdown-content span {
@@ -93,12 +98,11 @@
   }
   
   .dropdown-content span:hover {
-    background-color: black;
-    color: white;
+    background-color: #E5E7EB;
     cursor: pointer;
+    border-radius: 7px;
   }
   
-  .dropdown:hover .dropdown-content {
+  .dropdown-visible .dropdown-content {
     display: block;
   }
-  
