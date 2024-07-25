@@ -11,6 +11,7 @@ app.use(cors());
 
 // MongoDB connection
 const dbURI = 'mongodb+srv://motsuenyanetshegofatso:ZuwFnI3UcvuRi8K9@cluster1.wteqevk.mongodb.net/airbnbfunctional?retryWrites=true&w=majority';
+
 mongoose.connect(dbURI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB', err));
@@ -34,7 +35,8 @@ const listingSchema = new mongoose.Schema({
   rooms: String,
   amenities: String,
   rating: Number,
-  price: String
+  price: String,
+ locationName: String
 }, { collection: 'listings' });
 
 const Listing = mongoose.model('Listing', listingSchema);
@@ -68,31 +70,42 @@ app.post('/locations', async (req, res) => {
 
 // Route to get listings
 app.get('/listings', async (req, res) => {
-  const { locationName } = req.params;
+  const locationName = req.query.locationName; 
+  console.log('Location Name:', locationName);
+
+  if (!locationName) {
+    return res.status(400).json({ message: 'Location name is required' });
+  }
 
   try {
-    console.log(`Fetching listings for location: ${locationName}`);
-    const listings = await Listing.find({ locationName });
+    const listings = await Listing.find({ locationName: locationName });
     console.log('Listings fetched:', listings);
-    res.status(200).json(listings);
-  } catch (err) {
+    res.json(listings);
+  } catch (error) {
     console.error('Error fetching listings:', err);
-    res.status(500).json({ message: 'Server error', error: err });
+    res.status(500).json({ message: 'Error fetching listings' });
   }
 });
 
+
 // Route to add a new listing
 app.post('/listings', async (req, res) => {
-  const { img, title, description, rooms, amenities, rating, price } = req.body;
+  const { img, title, description, rooms, amenities, rating, price, locationName } = req.body;
 
   try {
-    const newListing = new Listing({ img, title, description, rooms, amenities, rating, price });
+    const newListing = new Listing({ img, title, description, rooms, amenities, rating, price, locationName });
     await newListing.save();
     res.status(201).json(newListing);
   } catch (err) {
     console.error('Error adding new listing:', err);
     res.status(500).json({ message: 'Server error', error: err });
   }
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  // Implement your login logic here
+  res.json({ message: 'Login successful' });
 });
 
 // Start the server

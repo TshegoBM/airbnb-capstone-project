@@ -1,44 +1,46 @@
 import React from "react";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import "./Reviews.css";
+import ProfilePicture from '../../assets/locationDetails/Person.png';
+import HostImage from '../../assets/locationDetails/Host.png'
 
 const reviews = [
   {
     name: "Jose",
     date: "December 2021",
     comment: "Host was very attentive.",
-    imageUrl: "https://s3-alpha-sig.figma.com/img/47ae/f179/48170d10ed99233abbde2ef57c5e4c23?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SnYcwT8zHE0mNgaJnW2Uoreu774QFYKBMWbIA354AMn~-BfYfYPLk~G59u2vUUAUyuIogx-Ifi1y6xw6VEcUbxEikjHkbEW5KcPYDcdhh9mwOl2iBeXdGM5uIQl1W5rLhdqSPTSKNtzIF6l9e6OGHXUfE2sZN~ISYOLSTxc859geEVmclO6gKK5Si8Jb4H1R5HvE7m8Nz2CN3UT92dPYJhViGgpWJ6RsUEik4VgQuuCwJo1470-J4s41EBZ54pn~OkPI8ewldr6pDQ2XnUQwD4ml~pWQYNkxo299z3qMzTdsT4~HLx6teyBR7DFu-DK9rat-nDyINPTfBqjFvGKshQ__",
+    imageUrl: ProfilePicture,
   },
   {
     name: "Shayna",
     date: "December 2021",
     comment: "Wonderful neighborhood, easy access to restaurants and the subway, cozy studio apartment with a super comfortable bed. Great host, super helpful and responsive. Cool murphy bed...",
-    imageUrl: "https://s3-alpha-sig.figma.com/img/47ae/f179/48170d10ed99233abbde2ef57c5e4c23?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SnYcwT8zHE0mNgaJnW2Uoreu774QFYKBMWbIA354AMn~-BfYfYPLk~G59u2vUUAUyuIogx-Ifi1y6xw6VEcUbxEikjHkbEW5KcPYDcdhh9mwOl2iBeXdGM5uIQl1W5rLhdqSPTSKNtzIF6l9e6OGHXUfE2sZN~ISYOLSTxc859geEVmclO6gKK5Si8Jb4H1R5HvE7m8Nz2CN3UT92dPYJhViGgpWJ6RsUEik4VgQuuCwJo1470-J4s41EBZ54pn~OkPI8ewldr6pDQ2XnUQwD4ml~pWQYNkxo299z3qMzTdsT4~HLx6teyBR7DFu-DK9rat-nDyINPTfBqjFvGKshQ__",
+    imageUrl: ProfilePicture,
   },
   {
     name: "Vladko",
     date: "November 2020",
     comment: "This is amazing place. It has everything one needs for a monthly business stay. Very clean and organized place. Amazing hospitality affordable price.",
-    imageUrl: "https://s3-alpha-sig.figma.com/img/47ae/f179/48170d10ed99233abbde2ef57c5e4c23?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SnYcwT8zHE0mNgaJnW2Uoreu774QFYKBMWbIA354AMn~-BfYfYPLk~G59u2vUUAUyuIogx-Ifi1y6xw6VEcUbxEikjHkbEW5KcPYDcdhh9mwOl2iBeXdGM5uIQl1W5rLhdqSPTSKNtzIF6l9e6OGHXUfE2sZN~ISYOLSTxc859geEVmclO6gKK5Si8Jb4H1R5HvE7m8Nz2CN3UT92dPYJhViGgpWJ6RsUEik4VgQuuCwJo1470-J4s41EBZ54pn~OkPI8ewldr6pDQ2XnUQwD4ml~pWQYNkxo299z3qMzTdsT4~HLx6teyBR7DFu-DK9rat-nDyINPTfBqjFvGKshQ__",
+    imageUrl: ProfilePicture,
   },
   {
     name: "Luke",
     date: "December 2021",
     comment: "Nice place to stay!",
-    imageUrl: "https://s3-alpha-sig.figma.com/img/47ae/f179/48170d10ed99233abbde2ef57c5e4c23?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SnYcwT8zHE0mNgaJnW2Uoreu774QFYKBMWbIA354AMn~-BfYfYPLk~G59u2vUUAUyuIogx-Ifi1y6xw6VEcUbxEikjHkbEW5KcPYDcdhh9mwOl2iBeXdGM5uIQl1W5rLhdqSPTSKNtzIF6l9e6OGHXUfE2sZN~ISYOLSTxc859geEVmclO6gKK5Si8Jb4H1R5HvE7m8Nz2CN3UT92dPYJhViGgpWJ6RsUEik4VgQuuCwJo1470-J4s41EBZ54pn~OkPI8ewldr6pDQ2XnUQwD4ml~pWQYNkxo299z3qMzTdsT4~HLx6teyBR7DFu-DK9rat-nDyINPTfBqjFvGKshQ__",
+    imageUrl: ProfilePicture,
   },
   {
     name: "Josh",
     date: "November 2021",
     comment: "Well designed and fun space, neighborhood has lots of energy and amenities.",
-    imageUrl: "https://s3-alpha-sig.figma.com/img/47ae/f179/48170d10ed99233abbde2ef57c5e4c23?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SnYcwT8zHE0mNgaJnW2Uoreu774QFYKBMWbIA354AMn~-BfYfYPLk~G59u2vUUAUyuIogx-Ifi1y6xw6VEcUbxEikjHkbEW5KcPYDcdhh9mwOl2iBeXdGM5uIQl1W5rLhdqSPTSKNtzIF6l9e6OGHXUfE2sZN~ISYOLSTxc859geEVmclO6gKK5Si8Jb4H1R5HvE7m8Nz2CN3UT92dPYJhViGgpWJ6RsUEik4VgQuuCwJo1470-J4s41EBZ54pn~OkPI8ewldr6pDQ2XnUQwD4ml~pWQYNkxo299z3qMzTdsT4~HLx6teyBR7DFu-DK9rat-nDyINPTfBqjFvGKshQ__",
+    imageUrl: ProfilePicture,
   },
   {
     name: "Jennifer",
     date: "January 2022",
     comment: "A centric place, near of a sub station and a supermarket with everything you need. ...",
-    imageUrl: "https://s3-alpha-sig.figma.com/img/47ae/f179/48170d10ed99233abbde2ef57c5e4c23?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SnYcwT8zHE0mNgaJnW2Uoreu774QFYKBMWbIA354AMn~-BfYfYPLk~G59u2vUUAUyuIogx-Ifi1y6xw6VEcUbxEikjHkbEW5KcPYDcdhh9mwOl2iBeXdGM5uIQl1W5rLhdqSPTSKNtzIF6l9e6OGHXUfE2sZN~ISYOLSTxc859geEVmclO6gKK5Si8Jb4H1R5HvE7m8Nz2CN3UT92dPYJhViGgpWJ6RsUEik4VgQuuCwJo1470-J4s41EBZ54pn~OkPI8ewldr6pDQ2XnUQwD4ml~pWQYNkxo299z3qMzTdsT4~HLx6teyBR7DFu-DK9rat-nDyINPTfBqjFvGKshQ__",
-  },
+    imageUrl: ProfilePicture,
+  }
 ];
 
 const Review = () => {

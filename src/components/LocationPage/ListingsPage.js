@@ -1,47 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Import useParams to get URL parameters
+import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import './ListingsPage.css'; // Ensure this file exists and is correctly styled
+import './ListingsPage.css';
 
 const ListingsPage = () => {
-  const { locationName } = useParams(); // Get locationName from URL
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const history = useHistory();
+  const query = new URLSearchParams(location.search);
+  const locationName = query.get('locationName');
 
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/listings?location=${encodeURIComponent(locationName)}`);
+        const response = await axios.get(`http://localhost:3001/listings?locationName=${encodeURIComponent(locationName)}`);
         setListings(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching listings:', error);
         setError('Error fetching listings');
         setLoading(false);
       }
     };
 
-    fetchListings();
-  }, [locationName]); // Fetch data when locationName changes
+    if (locationName) {
+      fetchListings();
+    } else {
+      setError('Location name is required');
+      setLoading(false);
+    }
+  }, [locationName]);
+
+  const handleCardClick = (id) => {
+    history.push(`/listing/${id}`);
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
     <div className="listings-page">
-      <h1 className="listings-header">Listings in {locationName}</h1>
+      <h1 className="listings-header">{listings.length} Stays in {locationName}</h1>
       <div className="listings-container">
         {listings.map((listing) => (
-          <div key={listing._id} className="listing-card">
+          <div 
+            key={listing._id} 
+            className="listing-card"
+            onClick={() => handleCardClick(listing._id)}
+            style={{ cursor: 'pointer' }}
+          >
             <img src={listing.img} alt={listing.title} className="listing-image" />
             <div className="listing-info">
               <h2 className="listing-title">{listing.title}</h2>
               <p className="listing-description">{listing.description}</p>
               <p className="listing-rooms">{listing.rooms}</p>
               <p className="listing-amenities">{listing.amenities}</p>
-              <p className="listing-rating">Rating: {listing.rating}</p>
-              <p className="listing-price">{listing.price}</p>
+              <div className="rating-and-price">
+                <p className="listing-rating">{listing.rating}</p>
+                <p className="listing-price"><span className='price-value'>{listing.price}</span> /night</p>
+              </div>
             </div>
           </div>
         ))}

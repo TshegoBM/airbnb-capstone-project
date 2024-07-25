@@ -15,14 +15,15 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DoorFrontOutlinedIcon from "@mui/icons-material/DoorFrontOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+import listing from '../../assets/locationDetails/listing.png';
+import WhereYoullSleep from '../../assets/locationDetails/Sleep.png'
+
 
 const LocationDetails = () => {
   const accommodationType = "Private Room"; // Example accommodation type
   const starRating = 4.5; // Example star rating
   const numberOfReviews = 120; // Example number of reviews
-  const imageUrl =
-    "https://s3-alpha-sig.figma.com/img/33e7/8912/bbfb42ca5051f5492bcbda4a216dccc6?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=PFF62WOwsIHqviChCXSdT62KWnoexOHuMkGZpzRKJ4TNDDXuNJySwoT3N~RXG3DDxZoRZEfBsnhroT4xNXIYiv43Fe30DtihkED5qRe7LQzf2jnqO68dScr~im7ksxFPaDEBw~mR0sE854dvMx-lWLYK~oeHAQLpwmjfYZxf2EdczbNtRESR8O~47a9OyUo95LKGYrwoODLyzjC1n02FSUhz-tHKPGbVlAj3bKMSj5QMf74nJPXUepVwOZDYNE-EZdl4n1LrhaATtvvIwG4wWjjZVtLeT1d9~gB8E8Xwzk4MFGhrWSgvUAvBY2DjvZDTJn4ZGeAqnOKap1pafEVR-A__";
-
+  const imageUrl = listing;
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [guests, setGuests] = useState(2);
@@ -137,7 +138,7 @@ const LocationDetails = () => {
           <div className="sleeping-arrangements">
             <h2>Where you'll sleep</h2>
             <img
-              src="https://s3-alpha-sig.figma.com/img/91d6/ccd9/96e5b436aa98cbfacf7fc152380f2a69?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RsCGmSkKk8UzH2rrjX~U01ZtdBdr0Wu-iczXliC94AdhK89mjc8CoxcoGfhEPMBPLfWowJLcbvjGQg1LyfTBL7isan4sGAmImP~ZBfxu6GBZI90yc8QShsNkAY8ZrDXFqGhOr-uBm8-fl30ijAo5G2oucYzdB~qsZ0Y-3zFF0N1BRxkfwFc9jRc50Wh-kwYlxNlam8V0GnGhR8GF~KeCHuZN3RcwRouiw18JKuhfTCwCjrRfGCGts3C0Y1Z8gYcn2oAvBPaL3ELhQUcblDZhj~krGZQyi9pIPZOjkAqqChyvtuU9FRPaAo4vgTKwtAQpMxm0l2XeSxH2zMWTmYCqXw__"
+              src={WhereYoullSleep}
               alt="Bedroom"
               className="sleeping-arrangements__image"
             />
