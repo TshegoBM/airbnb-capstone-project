@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import './LocationsPage.css';
+import StarIcon from '@mui/icons-material/Star';
+import './LocationCards.css';
 
-const LocationsPage = () => {
+const LocationCards = () => {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,32 +33,36 @@ const LocationsPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="locations-page">
-      <div className='locations-header'>
+    <div className="cards-container">
+      <div className='cards-heading'>
         <p>5 Stays in all locations</p>
       </div>
       {locations.map((location) => (
         <div 
           key={location._id} 
-          className="locations-cards" 
+          className="location-cards" 
           onClick={() => handleCardClick(location.locationName)}
           style={{ cursor: 'pointer' }}
         >
-          <img src={location.img} alt={location.locationName} />
-          <div className="location-info-container">
-            <div className="location-info">
-              <h2 className='location-name'>{location.locationName}</h2>
-              <h3 className="description">{location.locationDescription}</h3>
-              <p>{location.highlights}</p>
-            </div>
-            <div className="locationsResults_infoBottom">
-              <p>{location.numberOfStays}</p>
-            </div>
+          <img src={location.img} alt={location.locationName} className="location-image"/>
+          <div className="location-info">
+          <h2 className="location-title">{location.title}</h2>
+              <p className="location-name">{location.locationName}</p>
+              <p className="location-rooms">{location.rooms}</p>
+              <p className="location-amenities">{location.amenities}</p>
+              <div className="rating-and-price">
+                <div className='rating-and-star'>
+                <p className="location-rating">{location.rating}</p>
+                <StarIcon  className="gold-star"/>
+                <p className='reviews'>{location.reviews}</p>
+                </div>
+                <p className="location-price"><span className='price-value'>{location.price}</span> /night</p>
+          </div>
           </div>
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default LocationsPage;
+export default LocationCards;

@@ -16,30 +16,49 @@ mongoose.connect(dbURI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB', err));
 
+
+
+//Hotels schema and model
+const hotelsSchema =  new mongoose.Schema({
+  name: {
+    type: String,
+    required:true
+  },
+  value: {
+    type: String,
+    required: true
+  }
+})
+
+const Hotel =  mongoose.model('Hotel', hotelsSchema);
+
+//Fetching hotel locations from the database
+app.get('/api/hotels', async (req,res) => {
+  try {
+    const hotels = await Hotel.find();
+    res.json(hotels);
+  } catch (err) {
+    res.status(500).json({message: err.message});
+  }
+});
+
+
+
+
 // Location schema and model
 const locationSchema = new mongoose.Schema({
   img: String,
-  locationName: String,
-  locationDescription: String,
-  numberOfStays: String,
-  highlights: String
-}, { collection: 'locations' });
-
-const Location = mongoose.model('Location', locationSchema);
-
-// Listing schema and model
-const listingSchema = new mongoose.Schema({
-  img: String,
   title: String,
-  description: String,
+  locationName: String,
   rooms: String,
   amenities: String,
   rating: Number,
+  reviews: String,
   price: String,
- locationName: String
-}, { collection: 'listings' });
+ 
+}, { collection: 'locations' });
 
-const Listing = mongoose.model('Listing', listingSchema);
+const Location = mongoose.model('Location', locationSchema);
 
 // Route to get locations
 app.get('/locations', async (req, res) => {
@@ -56,10 +75,10 @@ app.get('/locations', async (req, res) => {
 
 // Route to add a new location
 app.post('/locations', async (req, res) => {
-  const { img, locationName, locationDescription, numberOfStays, highlights } = req.body;
+  const { img, locationName, rooms, amenities, rating, reviews, price } = req.body;
 
   try {
-    const newLocation = new Location({ img, locationName, locationDescription, numberOfStays, highlights });
+    const newLocation = new Location({ img, locationName, rooms, amenities, rating, reviews, price });
     await newLocation.save();
     res.status(201).json(newLocation);
   } catch (err) {
@@ -67,6 +86,24 @@ app.post('/locations', async (req, res) => {
     res.status(500).json({ message: 'Server error', error: err });
   }
 });
+
+
+
+
+// Listing schema and model
+const listingSchema = new mongoose.Schema({
+  img: String,
+  title: String,
+  description: String,
+  rooms: String,
+  amenities: String,
+  rating: Number,
+  price: String,
+ locationName: String
+}, { collection: 'listings' });
+
+const Listing = mongoose.model('Listing', listingSchema);
+
 
 // Route to get listings
 app.get('/listings', async (req, res) => {

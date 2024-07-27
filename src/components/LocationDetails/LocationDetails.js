@@ -20,9 +20,9 @@ import WhereYoullSleep from '../../assets/locationDetails/Sleep.png'
 
 
 const LocationDetails = () => {
-  const accommodationType = "Private Room"; // Example accommodation type
-  const starRating = 4.5; // Example star rating
-  const numberOfReviews = 120; // Example number of reviews
+  const accommodationType = "Private Room"; 
+  const starRating = 4.5;
+  const numberOfReviews = 120; 
   const imageUrl = listing;
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
@@ -297,7 +297,7 @@ const LocationDetails = () => {
                   <span class="total">
                     $
                     {nightlyRate *
-                      ((new Date(checkOutDate) - new Date(checkInDate)) /
+                      ((new Date(checkOutDate) - new Date(checkInDate) * (guests)) /
                         (1000 * 60 * 60 * 24)) || 0}
                   </span>
                 </p>

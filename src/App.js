@@ -84,8 +84,10 @@ import Layout from "./components/Footer/Layout";
 import Listing from "./components/Listing/Listing";
 import LoginPage from "./components/Admin/LoginPage";
 import CreateListings from "./components/Admin/CreateListings";
-import LocationsPage from "./components/LocationPage/LocationsPage";
-import ListingsPage from "./components/LocationPage/ListingsPage";
+import ListingsPage from "./components/ListingsPage";
+import ListingDetail from './components/Listing/ListingDetail';
+import LocationFilter from './components/LocationPage/LocationFilter';
+import LocationCards from './components/LocationPage/LocationCards';
 
 function App() {
   return (
@@ -106,11 +108,9 @@ function App() {
           </Route>
           
           <Route path="/locations" exact>
-            <ProfileSection />
-            <Filter />
-            <Layout>
-              <LocationsPage />
-            </Layout>
+      
+            <LocationFilter />
+              <LocationCards />
           </Route>
 
           <Route path="/listings" exact>
@@ -119,11 +119,12 @@ function App() {
             <ListingsPage />
           </Route>
 
-          <Route path="/listing" exact>
+          <Route path="/listing/:id" exact>
             <ProfileSection />
             <Filter />
             <Layout>
               <Listing />
+             <ListingDetail />
             </Layout>
           </Route>
           

@@ -23,7 +23,7 @@ const Filter = () => {
   };
 
   const handleSearch = () => {
-    // Handle the search logic here
+   
   };
 
   const toggleGuestOptions = () => {

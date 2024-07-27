@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import './ListingsPage.css';
 
@@ -11,12 +11,13 @@ const ListingsPage = () => {
   const history = useHistory();
   const query = new URLSearchParams(location.search);
   const locationName = query.get('locationName');
-
+  
   useEffect(() => {
     const fetchListings = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/listings?locationName=${encodeURIComponent(locationName)}`);
         setListings(response.data);
+        console.log('Im here', response.data)
         setLoading(false);
       } catch (error) {
         setError('Error fetching listings');
@@ -33,6 +34,7 @@ const ListingsPage = () => {
   }, [locationName]);
 
   const handleCardClick = (id) => {
+    console.log("my id", id)
     history.push(`/listing/${id}`);
   };
 
