@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import StarIcon from '@mui/icons-material/Star';
-import './LocationCards.css';
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import StarIcon from "@mui/icons-material/Star";
+import "./LocationCards.css";
 
 const LocationCards = () => {
   const [locations, setLocations] = useState([]);
@@ -13,11 +13,11 @@ const LocationCards = () => {
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/locations');
+        const response = await axios.get("http://localhost:3001/locations");
         setLocations(response.data);
         setLoading(false);
       } catch (error) {
-        setError('Error fetching locations');
+        setError("Error fetching locations");
         setLoading(false);
       }
     };
@@ -34,35 +34,41 @@ const LocationCards = () => {
 
   return (
     <div className="cards-container">
-      <div className='cards-heading'>
+      <div className="cards-heading">
         <p>5 Stays in all locations</p>
       </div>
       {locations.map((location) => (
-        <div 
-          key={location._id} 
-          className="location-cards" 
+        <div
+          key={location._id}
+          className="location-cards"
           onClick={() => handleCardClick(location.locationName)}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: "pointer" }}
         >
-          <img src={location.img} alt={location.locationName} className="location-image"/>
+          <img
+            src={location.img}
+            alt={location.locationName}
+            className="location-image"
+          />
           <div className="location-info">
-          <h2 className="location-title">{location.title}</h2>
-              <p className="location-name">{location.locationName}</p>
-              <p className="location-rooms">{location.rooms}</p>
-              <p className="location-amenities">{location.amenities}</p>
-              <div className="rating-and-price">
-                <div className='rating-and-star'>
+            <h2 className="location-title">{location.title}</h2>
+            <p className="location-name">{location.locationName}</p>
+            <p className="location-rooms">{location.rooms}</p>
+            <p className="location-amenities">{location.amenities}</p>
+            <div className="rating-and-price">
+              <div className="rating-and-star">
                 <p className="location-rating">{location.rating}</p>
-                <StarIcon  className="gold-star"/>
-                <p className='reviews'>{location.reviews}</p>
-                </div>
-                <p className="location-price"><span className='price-value'>{location.price}</span> /night</p>
-          </div>
+                <StarIcon className="gold-star" />
+                <p className="reviews">{location.reviews}</p>
+              </div>
+              <p className="location-price">
+                <span className="price-value">{location.price}</span> /night
+              </p>
+            </div>
           </div>
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default LocationCards;

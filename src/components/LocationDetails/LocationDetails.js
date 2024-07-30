@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+
 import "./LocationDetails.css";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
 import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
 import AdjustOutlinedIcon from "@mui/icons-material/AdjustOutlined";
@@ -15,18 +19,47 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DoorFrontOutlinedIcon from "@mui/icons-material/DoorFrontOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
-import listing from '../../assets/locationDetails/listing.png';
-import WhereYoullSleep from '../../assets/locationDetails/Sleep.png'
+import listingImage from '../../assets/locationDetails/listing.png';
+import WhereYouSleep from '../../assets/locationDetails/Sleep.png'
 
 
 const LocationDetails = () => {
-  const accommodationType = "Private Room"; 
-  const starRating = 4.5;
-  const numberOfReviews = 120; 
-  const imageUrl = listing;
+  const { id } = useParams();
+  const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [guests, setGuests] = useState(2);
+
+
+  useEffect(() => {
+    const fetchListingDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/location-details/${id}`);
+        setListing(response.data); // Update state with fetched data
+        setLoading(false);
+      } catch (error) {
+        setError('Error fetching location details');
+        setLoading(false);
+      }
+    };
+
+    fetchListingDetails();
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>; // Show loading state
+  if (error) return <p>{error}</p>; // Show error message
+
+  if (!listing) return <p>No listing found</p>; // Check if listing data is available
+
+
+
+  // const accommodationType = "Private Room"; 
+  const starRating = 4.5;
+  const numberOfReviews = 120; 
+  const imageUrl = listingImage;
+  
   const nightlyRate = 75;
   const weeklyDiscount = 28;
   const discount = 28;
@@ -61,7 +94,7 @@ const LocationDetails = () => {
     <div className="location-details-container">
       <div className="location-details">
         <div className="details-header">
-          <h1>{accommodationType}</h1>
+          <h1>{listing.title}</h1>
           <p>
             <StarRateIcon /> {starRating} ({numberOfReviews} reviews) - New York
           </p>
@@ -129,16 +162,15 @@ const LocationDetails = () => {
           </div>
           <div className="listing-overview">
             <p>
-              Come and stay in this superb duplex T2, in the heart of the
-              historic center of Bordeaux...
+              {listing.description}
             </p>
-            <p className="show-more-button">Show more</p>
+            <p className="show-more-button">Show more <ArrowForwardIosIcon /></p> 
           </div>
 
           <div className="sleeping-arrangements">
             <h2>Where you'll sleep</h2>
             <img
-              src={WhereYoullSleep}
+              src={WhereYouSleep}
               alt="Bedroom"
               className="sleeping-arrangements__image"
             />

@@ -158,9 +158,17 @@
 }
 
 .show-more-button {
+  display: flex;
+  align-items: center;
   text-decoration: underline;
-  margin-bottom: 20px;
+  margin: 20px 20px 20px 0px;
   cursor: pointer;
+}
+
+.show-more-button svg {
+  margin-left: 8px;
+  font-size: 10px;
+
 }
 
 .listing-overview {
@@ -598,7 +606,11 @@
 }
 
 .total {
-  font-weight: bold; /* Optional: make the total amount stand out */
+  font-weight: bold; 
 }
 
-
+.listing-overview p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import LocationDetails from '../LocationDetails/LocationDetails'
 import Reviews from './Reviews'
 import HostSection from './HostSection'
@@ -7,7 +8,7 @@ import ThingsToKnow from './ThingsToKnow'
 const Listing = () => {
   return (
     <div>
-      <LocationDetails/>
+      <LocationDetails />
       <Reviews/>
       <HostSection />
       <ThingsToKnow />
