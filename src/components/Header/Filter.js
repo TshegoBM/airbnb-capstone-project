@@ -94,7 +94,7 @@ useEffect(() => {
 
   const totalGuests = adults + children;
   return (
-    <div className="filter-container" style={{ backgroundColor: filterBackground }}>
+    <div className="filter-container" >
       <div className="search-bar">
         <div className="search-section">
           <label>Hotels</label>

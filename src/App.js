@@ -19,6 +19,7 @@ import ListingsPage from "./components/ListingsPage";
 import LocationFilter from './components/LocationPage/LocationFilter';
 import LocationCards from './components/LocationPage/LocationCards';
 import LocationDetails from './components/LocationDetails/LocationDetails';
+import LocationDetailsHeader from './components/LocationDetails/LocationDetailsHeader';
 
 function App() {
   return (
@@ -51,9 +52,7 @@ function App() {
 
 
           <Route path="/location-details/:id" exact>
-            <Layout>
               <Listing />
-            </Layout>
           </Route>
           
           <Route path="/login" exact>
