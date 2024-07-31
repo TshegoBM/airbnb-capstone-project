@@ -76,10 +76,10 @@ const ListingsPage = () => {
                 <div className="rating-and-star">
                   <p className="listing-rating">{listing.rating}</p>
                   <StarIcon className="gold-star" />
-                  <p className="reviews-count">{listing.reviews}</p>
+                  <p className="reviews">{listing.reviews}</p>
                 </div>
                 <p className="listing-price">
-                  <span className="price-value">{listing.price}</span> /night
+                <span className="price-value">R{parseFloat(listing.price).toFixed(2)}</span> /night
                 </p>
               </div>
             </div>

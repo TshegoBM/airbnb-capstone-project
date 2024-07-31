@@ -104,19 +104,20 @@
 }
 .rating-and-star {
   display: flex;
-  width: 20%;
-  gap:5px;
+  justify-content: space-between;
+  /* width: 150px; */
   align-items: flex-end;
+  gap: 2px;
 }
 
 .gold-star{
-  
   color: gold;
+  font-size: 1.2rem;
 }
 
 .reviews {
   font-size: 14px;
-  font-weight: 400px;
+  font-weight: 400;
   line-height: 20px;
   color: #6B7280;
 }

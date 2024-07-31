@@ -36,10 +36,17 @@ const LocationFilter = () => {
     fetchLocations();
   }, []);
 
+  const handleAllLocationsChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "location" && value === "local") {
+      history.push('/locations');
+    }
+  };
+
   const handleLocationChange = (e) => {
     const locationName = e.target.value;
     if (locationName) {
-      history.push(`/listings/${locationName}`);
+      history.push(`/listings?locationName=${encodeURIComponent(locationName)}`);
     }
   };
 
@@ -112,7 +119,7 @@ const LocationFilter = () => {
             <select
               name="location"
               className="select-style"
-              onChange={handleLocationChange}
+              onChange={handleAllLocationsChange}
             >
               <option value="">Select Hotel</option>
               <option value="local">All Locations</option>

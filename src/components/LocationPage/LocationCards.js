@@ -61,7 +61,7 @@ const LocationCards = () => {
                 <p className="reviews">{location.reviews}</p>
               </div>
               <p className="location-price">
-                <span className="price-value">{location.price}</span> /night
+              <span className="price-value">R{parseFloat(location.price).toFixed(2)}</span> /night
               </p>
             </div>
           </div>

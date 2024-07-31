@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import './Filter.css';
 import { useLocation, useHistory } from 'react-router-dom'; 
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,21 +8,53 @@ import SearchIcon from "@mui/icons-material/Search";
 const Filter = () => {
   const location = useLocation();
   const history = useHistory();
-  const filterBackground = location.pathname === '/locations' ? 'white' : 'black';
 
+  const filterBackground = location.pathname === '/locations' ? 'white' : 'black';
   const [showGuestOptions, setShowGuestOptions] = useState(false);
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
 
-  const guestDropdownRef = useRef(null);
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "location" && value === "local") {
+   // Fetch location names in our dropdown
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/locations');
+        setLocations(response.data);
+      } catch (error) {
+        console.error('Error fetching locations', error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
+
+// Update selectedLocation based on URL changes
+useEffect(() => {
+  const searchParams = new URLSearchParams(location.search);
+  const locationName = searchParams.get('locationName') || "";
+  setSelectedLocation(locationName);
+}, [location]);
+
+  
+  //Fetch all locations page 
+  const handleLocationChange = (e) => {
+    const selectedValue = e.target.value;
+    if (selectedValue === "local") {
       history.push('/locations');
+    } else if (selectedValue) {
+      history.push(`/listings?locationName=${encodeURIComponent(selectedValue)}`);
     }
   };
 
+  const handleChange = (e) => {
+    setSelectedLocation(e.target.value);
+  };
+
+  const guestDropdownRef = useRef(null);
+ 
   const handleSearch = () => {
    
   };
@@ -68,15 +101,15 @@ const Filter = () => {
           <select
             name="location"
             className="select-style"
-            onChange={handleChange}
+            onChange={handleLocationChange}
           >
             <option value="">Select Hotel</option>
             <option value="local">All Locations</option>
-            <option value="all">New York</option>
-            <option value="all">Paris</option>
-            <option value="all">Tokyo</option>
-            <option value="all">Cape Town</option>
-            <option value="all">Thailand</option>
+            {locations.map((location) => (
+          <option key={location._id} value={location.locationName}>
+            {location.locationName}
+          </option>
+        ))}
           </select>
         </div>
         <div className="search-section">
