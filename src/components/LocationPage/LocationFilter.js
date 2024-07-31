@@ -190,7 +190,7 @@ const LocationFilter = () => {
           </div>
         </div>
         <div className="header-right-container">
-          <p>Become a host</p>
+          <p>Welcome,</p>
           <LanguageIcon />
           <div className="header-dropdowns">
             <MenuIcon className="menu-icon" />

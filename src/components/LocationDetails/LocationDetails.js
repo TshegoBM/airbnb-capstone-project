@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import "./LocationDetails.css";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import LocalFloristOutlinedIcon from "@mui/icons-material/LocalFloristOutlined";
 import WifiOutlinedIcon from "@mui/icons-material/WifiOutlined";
 import AdjustOutlinedIcon from "@mui/icons-material/AdjustOutlined";
@@ -19,9 +18,8 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DoorFrontOutlinedIcon from "@mui/icons-material/DoorFrontOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
-import listingImage from '../../assets/locationDetails/listing.png';
-import WhereYouSleep from '../../assets/locationDetails/Sleep.png'
-
+import ListingImage from "../../assets/locationDetails/listing.png";
+import WhereYouSleep from "../../assets/locationDetails/Sleep.png";
 
 const LocationDetails = () => {
   const { id } = useParams();
@@ -30,37 +28,11 @@ const LocationDetails = () => {
   const [error, setError] = useState(null);
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
-  const [guests, setGuests] = useState(2);
+  const [startDate, setStartDate] = useState(new Date());
+  const [guests, setGuests] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-
-  useEffect(() => {
-    const fetchListingDetails = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/location-details/${id}`);
-        setListing(response.data); // Update state with fetched data
-        setLoading(false);
-      } catch (error) {
-        setError('Error fetching location details');
-        setLoading(false);
-      }
-    };
-
-    fetchListingDetails();
-  }, [id]);
-
-  if (loading) return <p>Loading...</p>; // Show loading state
-  if (error) return <p>{error}</p>; // Show error message
-
-  if (!listing) return <p>No listing found</p>; // Check if listing data is available
-
-
-
-  // const accommodationType = "Private Room"; 
-  const starRating = 4.5;
-  const numberOfReviews = 120; 
-  const imageUrl = listingImage;
-  
-  const nightlyRate = 75;
   const weeklyDiscount = 28;
   const discount = 28;
   const cleaningFee = 62;
@@ -68,19 +40,60 @@ const LocationDetails = () => {
   const taxesAndFees = 29;
 
   const calculateTotalPrice = () => {
-    const nights =
-      (new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24);
-    if (isNaN(nights) || nights <= 0) {
+    if (!listing || !listing.price || !checkInDate || !checkOutDate) {
       return 0;
     }
+
+    const pricePerNight = parseFloat(listing.price);
+    const nights =
+      (new Date(checkOutDate) - new Date(checkInDate)) / (1000 * 60 * 60 * 24);
+
+    if (isNaN(nights) || nights <= 0) return 0;
+
+    const basePrice = pricePerNight * nights;
     const total =
-      nightlyRate * nights - discount + cleaningFee + serviceFee + taxesAndFees;
+      (basePrice - discount + cleaningFee + serviceFee + taxesAndFees) *
+      parseInt(guests, 10);
+
     return total;
   };
 
-  const totalPrice = calculateTotalPrice();
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [guests, checkInDate, checkOutDate, listing]);
 
+  useEffect(() => {
+    const fetchListingDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/location-details/${id}`
+        );
+        setListing(response.data); // Update state with fetched data
+        setLoading(false);
+      } catch (error) {
+        setError("Error fetching location details");
+        setLoading(false);
+      }
+    };
+
+    fetchListingDetails();
+  }, [id]);
+
+  useEffect(() => {
+    setTotal(calculateTotalPrice());
+  }, [checkInDate, checkOutDate, guests, listing]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!listing) return <p>No listing found</p>;
+
+  //Reservation
   const handleReserve = () => {
+    if (!isLoggedIn) {
+      alert("Please log in to make a reservation");
+      return;
+    }
+
     if (checkInDate && checkOutDate && guests) {
       alert(
         `Reservation made from ${checkInDate} to ${checkOutDate} for ${guests} guests.`
@@ -96,21 +109,22 @@ const LocationDetails = () => {
         <div className="details-header">
           <h1>{listing.title}</h1>
           <p>
-            <StarRateIcon /> {starRating} ({numberOfReviews} reviews) - New York
+            <StarRateIcon /> {listing.rating} {listing.reviews} -{" "}
+            {listing.locationName}
           </p>
         </div>
         <div className="image-section-container">
           <div className="main-image">
-            <img src={imageUrl} alt="Main Image" />
+            <img src={ListingImage} alt="Main Image" />
           </div>
           <div className="small-images">
             <div className="small-images-row">
-              <img src={imageUrl} alt="Small Image 1" />
-              <img src={imageUrl} alt="Small Image 2" />
+              <img src={ListingImage} alt="Small Image 1" />
+              <img src={ListingImage} alt="Small Image 2" />
             </div>
             <div className="small-images-row">
-              <img src={imageUrl} alt="Small Image 3" />
-              <img src={imageUrl} alt="Small Image 4" />
+              <img src={ListingImage} alt="Small Image 3" />
+              <img src={ListingImage} alt="Small Image 4" />
             </div>
           </div>
         </div>
@@ -122,13 +136,13 @@ const LocationDetails = () => {
             <div className="highlight-container">
               <div className="highlight-heading">
                 <p className="hosted-by"> Entire Rental Hosted by Ghazel</p>
-                <p className="details">2 guests · 1 bedroom · 1 bed · 1 bath</p>
+                <p className="details">{listing.rooms}</p>
               </div>
               <div className="highlight-details-container">
                 <div className="highlight">
                   <HomeOutlinedIcon className="highlight-icon" />
                   <div>
-                    <h3>Entire home</h3>
+                    <h3>{listing.title}</h3>
                     <p>You might share the room with other people.</p>
                   </div>
                 </div>
@@ -161,10 +175,10 @@ const LocationDetails = () => {
             </div>
           </div>
           <div className="listing-overview">
-            <p>
-              {listing.description}
+            <p>{listing.description}</p>
+            <p className="show-more-button">
+              Show more <ArrowForwardIosIcon />
             </p>
-            <p className="show-more-button">Show more <ArrowForwardIosIcon /></p> 
           </div>
 
           <div className="sleeping-arrangements">
@@ -282,9 +296,9 @@ const LocationDetails = () => {
         <div className="right-column">
           <div className="reservation-card">
             <div className="price-info">
-              <h2>${nightlyRate} / night</h2>
+              <h2>R{listing.price} / night</h2>
               <p>
-                <StarRateIcon /> {starRating} · {numberOfReviews} reviews
+                <StarRateIcon /> {listing.rating} · {listing.reviews}
               </p>
             </div>
             <div className="booking-info">
@@ -321,40 +335,39 @@ const LocationDetails = () => {
             <div className="price-breakdown">
               <div class="fees">
                 <p>
-                  <span class="rate">${nightlyRate} x 
+                  <span class="rate">
+                    R{listing.price} x
                     {(new Date(checkOutDate) - new Date(checkInDate)) /
                       (1000 * 60 * 60 * 24) || 0}{" "}
                     nights
                   </span>
                   <span class="total">
-                    $
-                    {nightlyRate *
-                      ((new Date(checkOutDate) - new Date(checkInDate) * (guests)) /
+                    R{" "}
+                    {listing.price *
+                      ((new Date(checkOutDate) - new Date(checkInDate)) /
                         (1000 * 60 * 60 * 24)) || 0}
                   </span>
                 </p>
-
                 <p>
                   <span class="label">Weekly discount:</span>{" "}
-                  <span class="amount">-${weeklyDiscount}</span>
+                  <span class="amount">-R{weeklyDiscount}</span>
                 </p>
                 <p>
                   <span class="label">Cleaning fee:</span>{" "}
-                  <span class="amount">${cleaningFee}</span>
+                  <span class="amount">R{cleaningFee}</span>
                 </p>
                 <p>
                   <span class="label">Service fee:</span>{" "}
-                  <span class="amount">${serviceFee}</span>
+                  <span class="amount">R{serviceFee}</span>
                 </p>
                 <p>
                   <span class="label">Occupancy taxes and fees:</span>{" "}
-                  <span class="amount">${taxesAndFees}</span>
+                  <span class="amount">R{taxesAndFees}</span>
                 </p>
               </div>
-
-              <hr />
-              <h3>Total: ${totalPrice}</h3>
             </div>
+            <hr />
+            <h3>Total: R{total} </h3>
           </div>
         </div>
       </div>
