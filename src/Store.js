@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { thunk } from "redux-thunk"; // Import thunk
+import thunk from "redux-thunk"; // Import thunk
 import { listingListReducer } from "./reducers/listingReducer";
 import { modalReducer } from "./reducers/modalReducer";
 import { userLoginReducer } from "./reducers/userReducer";
