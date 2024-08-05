@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './Filter.css';
-import { useLocation, useHistory } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom'; 
 import SearchIcon from "@mui/icons-material/Search";
 
 
 const Filter = () => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const filterBackground = location.pathname === '/locations' ? 'white' : 'black';
   const [showGuestOptions, setShowGuestOptions] = useState(false);
@@ -43,9 +43,9 @@ useEffect(() => {
   const handleLocationChange = (e) => {
     const selectedValue = e.target.value;
     if (selectedValue === "local") {
-      history.push('/locations');
+    navigate ('/locations');
     } else if (selectedValue) {
-      history.push(`/listings?locationName=${encodeURIComponent(selectedValue)}`);
+      navigate(`/listings?locationName=${encodeURIComponent(selectedValue)}`);
     }
   };
 

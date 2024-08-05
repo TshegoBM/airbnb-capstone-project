@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./LocationDetails.css";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -23,6 +24,8 @@ import WhereYouSleep from "../../assets/locationDetails/Sleep.png";
 
 const LocationDetails = () => {
   const { id } = useParams();
+  const [userInfo, setUserInfo] = useState(null);
+  const history = useNavigate();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +34,6 @@ const LocationDetails = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [guests, setGuests] = useState(1);
   const [total, setTotal] = useState(0);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const weeklyDiscount = 28;
   const discount = 28;
@@ -89,20 +91,21 @@ const LocationDetails = () => {
 
   //Reservation
   const handleReserve = () => {
-    if (!isLoggedIn) {
-      alert("Please log in to make a reservation");
+    // Check if user is logged in
+    if (!userInfo) {
+      alert("Please log in to make a reservation.");
       return;
     }
-
+  
+    // Check if all fields are filled
     if (checkInDate && checkOutDate && guests) {
-      alert(
-        `Reservation made from ${checkInDate} to ${checkOutDate} for ${guests} guests.`
-      );
+      // Proceed with reservation
+      alert("Reservation successful!");
     } else {
       alert("Please fill in all fields to make a reservation.");
     }
   };
-
+  
   return (
     <div className="location-details-container">
       <div className="location-details">
@@ -115,16 +118,16 @@ const LocationDetails = () => {
         </div>
         <div className="image-section-container">
           <div className="main-image">
-            <img src={ListingImage} alt="Main Image" />
+            <img src={listing.img} alt="Main Image" />
           </div>
           <div className="small-images">
             <div className="small-images-row">
-              <img src={ListingImage} alt="Small Image 1" />
-              <img src={ListingImage} alt="Small Image 2" />
+              <img src={listing.img} alt="Small Image 1" />
+              <img src={listing.img} alt="Small Image 2" />
             </div>
             <div className="small-images-row">
-              <img src={ListingImage} alt="Small Image 3" />
-              <img src={ListingImage} alt="Small Image 4" />
+              <img src={listing.img} alt="Small Image 3" />
+              <img src={listing.img} alt="Small Image 4" />
             </div>
           </div>
         </div>
@@ -367,7 +370,7 @@ const LocationDetails = () => {
               </div>
             </div>
             <hr />
-            <h3>Total: R{total} </h3>
+            <h3 className="total">Total: R{total} </h3>
           </div>
         </div>
       </div>

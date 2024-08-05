@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import StarIcon from "@mui/icons-material/Star";
 import "./LocationCards.css";
@@ -8,7 +8,7 @@ const LocationCards = () => {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -26,7 +26,7 @@ const LocationCards = () => {
   }, []);
 
   const handleCardClick = (locationName) => {
-    history.push(`/listings?locationName=${encodeURIComponent(locationName)}`);
+    navigate(`/listings?locationName=${encodeURIComponent(locationName)}`);
   };
 
   if (loading) return <p>Loading...</p>;

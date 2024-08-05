@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; //Deprecated??
+import { UserContext } from '../Context/UserContext';
 import axios from 'axios';
 import "./LoginPage.css"; 
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { login } = React.useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,28 +17,27 @@ const LoginPage = () => {
       const response = await axios.post('http://localhost:3001/login', {
         username,
         password
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log(response.data);
+
+      if (response.data.message === 'Login successful') {
+        login(response.data.user);
+
+        alert('Great! Your login was successful!');
+    navigate('/locations');
+      } else {
+        alert("Login failed. Please try again.");
       }
-      
-    });
-
-    console.log(response.data)
-
-    if (response.data.message === 'Login successful') {
-    setMessage('Great! Your login was successful!');
-    history.push('/locations');
-    } else {
-      setMessage("Oops! Login failed. Please try again.");
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Login failed. Please try again.");
     }
-    setUsername("");
-    setPassword("");
-  } catch (error) {
-    console.error("Login error:", error);
-    setMessage("Oops! Login failed. Please try again.");
-  }
-};
+  };
 
   return (
     <div className="login-container">
@@ -74,7 +74,7 @@ const LoginPage = () => {
             required
           />
         </div>
-        <p> Forgot Password?</p>
+        <p>Forgot Password?</p>
 
         <button type="submit">Login</button>
       </form>

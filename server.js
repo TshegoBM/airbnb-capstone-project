@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const app = express(); //Initializes the app
+const app = express(); // Initializes the app
 const PORT = 3001;
 
 // Middleware
@@ -13,13 +13,13 @@ app.use(cors());
 const dbURI =
   "mongodb+srv://motsuenyanetshegofatso:ZuwFnI3UcvuRi8K9@cluster1.wteqevk.mongodb.net/airbnbfunctional?retryWrites=true&w=majority";
 
-mongoose.connect(dbURI)
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB", err));
 
 // Schema and Model Definitions
 
-//Hotels schema and model
+// Hotels schema and model
 const hotelsSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -67,9 +67,23 @@ const listingSchema = new mongoose.Schema(
 
 const Listing = mongoose.model("Listing", listingSchema);
 
-//Routes
+// User schema and model (assuming you have a user collection)
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-//Fetching hotel locations from the database
+const User = mongoose.model("User", userSchema);
+
+// Routes
+
+// Fetching hotel locations from the database
 app.get("/api/hotels", async (req, res) => {
   try {
     const hotels = await Hotel.find();
@@ -78,7 +92,6 @@ app.get("/api/hotels", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
 
 // Route to get locations
 app.get("/locations", async (req, res) => {
@@ -95,8 +108,7 @@ app.get("/locations", async (req, res) => {
 
 // Route to add a new location
 app.post("/locations", async (req, res) => {
-  const { img, locationName, rooms, amenities, rating, reviews, price } =
-    req.body;
+  const { img, locationName, rooms, amenities, rating, reviews, price } = req.body;
 
   try {
     const newLocation = new Location({
@@ -116,7 +128,6 @@ app.post("/locations", async (req, res) => {
   }
 });
 
-
 // Route to get listings
 app.get("/listings", async (req, res) => {
   const locationName = req.query.locationName;
@@ -127,15 +138,16 @@ app.get("/listings", async (req, res) => {
   }
 
   try {
-    const listings = await Listing.find({ locationName: locationName });
+    const listings = await Listing.find({ locationName });
     console.log("Listings fetched:", listings);
     res.json(listings);
-  } catch (error) {
+  } catch (err) {
     console.error("Error fetching listings:", err);
     res.status(500).json({ message: "Error fetching listings" });
   }
 });
 
+// Route to get distinct location names
 app.get("/location-names", async (req, res) => {
   try {
     const locations = await Listing.distinct("locationName");
@@ -148,16 +160,7 @@ app.get("/location-names", async (req, res) => {
 
 // Route to add a new listing
 app.post("/listings", async (req, res) => {
-  const {
-    img,
-    title,
-    description,
-    rooms,
-    amenities,
-    rating,
-    price,
-    locationName,
-  } = req.body;
+  const { img, title, description, rooms, amenities, rating, price, locationName } = req.body;
 
   try {
     const newListing = new Listing({
@@ -182,22 +185,32 @@ app.post("/listings", async (req, res) => {
 app.get("/location-details/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const listing = await Listing.findById(id); // Use Listing model to find by ID
+    const listing = await Listing.findById(id);
     if (!listing) {
       return res.status(404).json({ message: "Listing not found" });
     }
-    res.status(200).json(listing); // Return the listing object
+    res.status(200).json(listing);
   } catch (err) {
     console.error("Error fetching listing details:", err);
     res.status(500).json({ message: "Server error", error: err });
   }
 });
 
-app.post("/login", (req, res) => {
+// Login route
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  // Login logic...
-  res.json({ message: "Login successful" });
+  try {
+    const user = await User.findOne({ username });
+
+    if (user && user.password === password) {
+      res.json({ message: "Login successful", user });
+    } else {
+      res.status(401).json({ message: "Invalid credentials" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 // Start the server
-app.listen(3001, () => console.log("Server running on port 3001"));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

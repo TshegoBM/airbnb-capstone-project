@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar } from '@mui/material';
@@ -12,12 +12,12 @@ const ProfileSection = () => {
   const dispatch = useDispatch();
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const openModalHandle = () => {
-    history.push('/login');  // Redirect to login page
+    navigate('/login');  // Redirect to login page
     setDropdownVisible(false);
   };
 

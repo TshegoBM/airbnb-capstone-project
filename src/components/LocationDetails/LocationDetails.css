@@ -606,6 +606,8 @@
 
 .total {
   font-weight: bold; 
+  text-align: left;
+  margin-top: 20px;
 }
 
 .listing-overview p {

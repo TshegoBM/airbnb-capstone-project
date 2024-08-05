@@ -1,5 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import "./App.css";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from './actions/userActions';
 import DiscoverExperiences from "./components/Home/DiscoverExperiences";
 import HeroBanner from "./components/Home/HeroBanner";
 import Inspiration from "./components/Home/Inspiration";
@@ -9,60 +12,79 @@ import ProfileSection from "./components/Header/ProfileSection";
 import QuestionsAboutHosting from "./components/Home/QuestionsAboutHosting";
 import FutureGetaways from "./components/Home/FutureGetaways";
 import Layout from "./components/Footer/Layout";
-import Reviews from "./components/Listing/Reviews"
-import HostSection from './components/Listing/HostSection';
-import ThingsToKnow from './components/Listing/ThingsToKnow';
 import Listing from './components/Listing/Listing';
 import LoginPage from "./components/Admin/LoginPage";
 import CreateListings from "./components/Admin/CreateListings";
 import ListingsPage from "./components/ListingsPage";
 import LocationFilter from './components/LocationPage/LocationFilter';
 import LocationCards from './components/LocationPage/LocationCards';
-import LocationDetails from './components/LocationDetails/LocationDetails';
-import LocationDetailsHeader from './components/LocationDetails/LocationDetailsHeader';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo');
+    if (userInfo) {
+      dispatch(login(JSON.parse(userInfo)));
+    }
+  }, [dispatch]);
+  
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <ProfileSection />
-            <Filter />
-            <Layout>
-              <HeroBanner />
-              <Inspiration />
-              <DiscoverExperiences />
-              <ShopAirBnb />
-              <QuestionsAboutHosting />
-              <FutureGetaways />
-            </Layout>
-          </Route>
-          
-          <Route path="/locations" exact>
-            <LocationFilter />
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <>
+              <ProfileSection />
+              <Filter />
+              <Layout>
+                <HeroBanner />
+                <Inspiration />
+                <DiscoverExperiences />
+                <ShopAirBnb />
+                <QuestionsAboutHosting />
+                <FutureGetaways />
+              </Layout>
+            </>
+          } 
+        />
+        
+        <Route 
+          path="/locations" 
+          element={
+            <>
+              <LocationFilter />
               <LocationCards />
-          </Route>
+            </>
+          } 
+        />
 
-          <Route path="/listings" exact>
-            <ProfileSection />
-            <Filter />
-            <ListingsPage />
-          </Route>
+        <Route 
+          path="/listings" 
+          element={
+            <>
+              <LocationFilter />
+              <ListingsPage />
+            </>
+          } 
+        />
 
-
-          <Route path="/location-details/:id" exact>
-              <Listing />
-          </Route>
-          
-          <Route path="/login" exact>
-            <LoginPage />
-          </Route>
-          <Route path="/createlisting" exact>
-            <CreateListings />
-          </Route>
-        </Switch>
-      </Router>
+        <Route 
+          path="/location-details/:id" 
+          element={<Listing />} 
+        />
+        
+        <Route 
+          path="/login" 
+          element={<LoginPage />} 
+        />
+        
+        <Route 
+          path="/createlisting" 
+          element={<CreateListings />} 
+        />
+      </Routes>
     </div>
   );
 }

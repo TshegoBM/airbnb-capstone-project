@@ -36,3 +36,19 @@ const Modal = () => {
 }
 
 export default Modal
+
+
+// const Modal = ({setIsOpen}) => {
+//   return (
+//     <>
+//     <div onClick={() => setOpen(false)}> 
+//     <div style= {}>
+//       <h3> Test Modal</h3>
+//       <button onClick={() => setIsOpen(false)}>Close</button>
+//       <p> This is a simple modal</p>
+
+//     </div>
+//     </div>
+//     </>
+//   )
+// }

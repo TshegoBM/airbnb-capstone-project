@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import "./ListingsPage.css";
@@ -9,7 +9,7 @@ const ListingsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const query = new URLSearchParams(location.search);
   const locationName = query.get("locationName");
 
@@ -43,7 +43,7 @@ const ListingsPage = () => {
 //Handle Card Click to Redirect to the Details Page
   const handleCardClick = (id) => {
     console.log("Navigating to listing details for id", id);
-    history.push(`/location-details/${id}`);
+    navigate(`/location-details/${id}`);
   };
 
   if (loading) return <p>Loading...</p>;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useHistory, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import './LocationFilter.css';
@@ -10,7 +10,7 @@ import { Avatar } from '@mui/material';
 
 const LocationFilter = () => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showGuestOptions, setShowGuestOptions] = useState(false);
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
@@ -39,19 +39,19 @@ const LocationFilter = () => {
   const handleAllLocationsChange = (e) => {
     const { name, value } = e.target;
     if (name === "location" && value === "local") {
-      history.push('/locations');
+      navigate('/locations');
     }
   };
 
   const handleLocationChange = (e) => {
     const locationName = e.target.value;
     if (locationName) {
-      history.push(`/listings?locationName=${encodeURIComponent(locationName)}`);
+      navigate(`/listings?locationName=${encodeURIComponent(locationName)}`);
     }
   };
 
   const openModalHandle = () => {
-    history.push('/login'); // Redirect to login page
+    navigate('/login'); // Redirect to login page
     setDropdownVisible(false);
   };
 
@@ -197,7 +197,7 @@ const LocationFilter = () => {
           </div>
         </div>
         <div className="header-right-container">
-          <p>Welcome,</p>
+        <p>{userInfo ? `Welcome ${userInfo.name}` : "Become a host" }</p>
           <LanguageIcon />
           <div className="header-dropdowns">
             <MenuIcon className="menu-icon" />
