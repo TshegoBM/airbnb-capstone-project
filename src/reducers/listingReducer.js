@@ -1,6 +1,6 @@
 import {LISTING_LIST_REQUEST,LISTING_LIST_SUCCESS,LISTING_LIST_FAIL} from '../types/listingTypes'
 
-export const listingListReducer = (state = {listings: []}, action) => {
+const listingListReducer = (state = {listings: []}, action) => {
     switch (action.type) {
         case LISTING_LIST_REQUEST:
             return { loading: true, listings: []};
@@ -13,3 +13,5 @@ export const listingListReducer = (state = {listings: []}, action) => {
                 return state;
     }
 };
+
+export default listingListReducer;
