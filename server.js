@@ -1,18 +1,18 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express(); // Initializes the app
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+const dbURI = process.env.MONGO_URI;
+
 
 // Middleware
 app.use(express.json());
 app.use(cors());
 
 // MongoDB connection
-const dbURI =
-  "mongodb+srv://motsuenyanetshegofatso:ZuwFnI3UcvuRi8K9@cluster1.wteqevk.mongodb.net/airbnbfunctional?retryWrites=true&w=majority";
-
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB", err));
