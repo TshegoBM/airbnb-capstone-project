@@ -1,5 +1,4 @@
 // src/index.js
-import dotenv from 'dotenv';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -9,7 +8,6 @@ import { Provider } from 'react-redux';
 import store from './Store';
 import { UserProvider } from './components/Context/UserContext';  // Import UserProvider
 
-dotenv.config();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
