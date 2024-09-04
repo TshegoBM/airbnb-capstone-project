@@ -1,0 +1,5 @@
+// src/types/reservationTypes.js
+
+export const RESERVATIONS_REQUEST = 'RESERVATIONS_REQUEST';
+export const RESERVATIONS_SUCCESS = 'RESERVATIONS_SUCCESS';
+export const RESERVATIONS_FAIL = 'RESERVATIONS_FAIL';

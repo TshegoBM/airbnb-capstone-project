@@ -1,31 +1,61 @@
-// UserContext.js
 import React, { createContext, useState, useEffect } from 'react';
 
-export const UserContext = createContext();
+export const UserContext = createContext({
+  userInfo: null,
+  isLoggedIn: false,
+  login: () => {},
+  logout: () => {},
+});
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-    //   setUser(JSON.parse(savedUser));
+  const [userInfo, setUserInfo] = useState(() => {
+    try {
+      const storedUser = localStorage.getItem('user');
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      console.error("Error parsing user data from localStorage:", error);
+      return null;
     }
-  }, []);
+  });
+
+  const isLoggedIn = !!userInfo;
 
   const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    try {
+      setUserInfo(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+    } catch (error) {
+      console.error("Error saving user data to localStorage:", error);
+    }
   };
 
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
+    setUserInfo(null);
+    try {
+      localStorage.removeItem('user');
+    } catch (error) {
+      console.error("Error removing user data from localStorage:", error);
+    }
   };
 
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === 'user') {
+        try {
+          const newUser = event.newValue ? JSON.parse(event.newValue) : null;
+          setUserInfo(newUser);
+        } catch (error) {
+          console.error("Error parsing user data from localStorage:", error);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ userInfo, isLoggedIn, login, logout }}>
       {children}
     </UserContext.Provider>
   );

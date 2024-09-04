@@ -1,25 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { UserContext } from '../Context/UserContext';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar } from '@mui/material';
-import LoginPage from '../Admin/LoginPage';
-import { openModal } from '../../actions/modalAction';
 import './ProfileSection.css';
 
 const ProfileSection = () => {
-  const dispatch = useDispatch();
+  const { userInfo, logout } = useContext(UserContext);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
-  const openModalHandle = () => {
-    navigate('/login');  // Redirect to login page
+  const handleLogout = () => {
+    logout(); // Call logout from UserContext
+    setDropdownVisible(false);
+    navigate('/'); // Redirect to home page after logging out
+  };
+
+  const handleBecomeHost = () => {
+    navigate('/admin/login?redirect=/admin/view-listings'); // Redirect to login page with query parameter
     setDropdownVisible(false);
   };
+
+  const handleLoginClick = () => {
+    navigate('/admin/login?redirect=/locations'); // Redirect to login page with query parameter
+    setDropdownVisible(false);
+  };
+
+  // const openModalHandle = () => {
+  //   navigate('/admin/login');  // Redirect to login page
+  //   setDropdownVisible(false);
+  // };
 
   const toggleDropdown = (e) => {
     e.stopPropagation();
@@ -55,7 +68,7 @@ const ProfileSection = () => {
           <p>Online Experiences</p>
         </div>
         <div className="header_right">
-          <p>Become a host</p>
+          <p onClick={handleBecomeHost}>Become a host</p> {/* Corrected onClick */}
           <LanguageIcon />
           <div className="header_dropdowns">
             <MenuIcon className="menu-icon" />
@@ -64,13 +77,13 @@ const ProfileSection = () => {
               <div className="dropdown-content" ref={dropdownRef}>
                 {userInfo ? (
                   <>
-                    <span>Account</span>
-                    <span>Log out</span>
+                    <span onClick={() => navigate('/reservations')}>View Reservations</span>
+                    <span onClick={handleLogout}>Log out</span>
                   </>
                 ) : (
-                  <>
-                    <span onClick={openModalHandle}>Log in</span>
-                  </>
+                  <div className='login-dropdown'>
+                    <span onClick={handleLoginClick}>Log in</span>
+                  </div>
                 )}
               </div>
             </div>

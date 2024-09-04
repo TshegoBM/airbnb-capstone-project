@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import { UserContext } from '../Context/UserContext';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import './LocationFilter.css';
+import './LocationHeader.css';
 import LanguageIcon from '@mui/icons-material/Language';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar } from '@mui/material';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const LocationFilter = () => {
-  const location = useLocation();
+const LocationHeader = () => {
+  const { userInfo, logout} = useContext(UserContext);
   const navigate = useNavigate();
   const [showGuestOptions, setShowGuestOptions] = useState(false);
   const [adults, setAdults] = useState(0);
@@ -17,12 +19,18 @@ const LocationFilter = () => {
   const guestDropdownRef = useRef(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
-  const totalGuests = adults + children;
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
   const [locations, setLocations] = useState([]);
+  const totalGuests = adults + children;
 
-  // Fetch location names in our dropdown
+  const handleLogout = () => {
+    logout();
+    setDropdownVisible(false);
+    navigate('/');
+  };
+
+
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -51,7 +59,7 @@ const LocationFilter = () => {
   };
 
   const openModalHandle = () => {
-    navigate('/login'); // Redirect to login page
+    navigate('/login');
     setDropdownVisible(false);
   };
 
@@ -101,6 +109,28 @@ const LocationFilter = () => {
     }
   };
 
+  const handleLoginClick = () => {
+    navigate('/admin/login?redirect=/locations'); // Redirect to login page with query parameter
+    setDropdownVisible(false);
+  };
+
+  const handleBecomeHost = () => {
+    navigate('/admin/login?redirect=/admin/view-listings'); // Redirect to login page with query parameter
+    setDropdownVisible(false);
+  };
+
+  const handleViewReservations = () => {
+    navigate('/reservations'); // Navigate to the reservations page
+  };
+
+  const handleSearch = () => {
+    if (checkInDate && checkOutDate) {
+      navigate(`/listings?checkInDate=${checkInDate.toISOString()}&checkOutDate=${checkOutDate.toISOString()}&guests=${totalGuests}`);
+    } else {
+      alert('Please select both check-in and check-out dates.');
+    }
+  };
+
   return (
     <div className="parent-container">
       <div className="locations-filter-container">
@@ -109,7 +139,7 @@ const LocationFilter = () => {
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/1024px-Airbnb_Logo_B%C3%A9lo.svg.png"
               className="header-logo"
-              alt="Airbnb logo"
+              alt="logo"
             />
           </Link>
         </div>
@@ -132,20 +162,25 @@ const LocationFilter = () => {
           </div>
           <div className="search-section">
             <label>Check in</label>
-            <input
-              type="text"
-              name="checkInDate"
-              placeholder="Add dates"
-              onChange={() => {}}
+            <ReactDatePicker
+              selected={checkInDate}
+              onChange={(date) => setCheckInDate(date)}
+              selectsStart
+              startDate={checkInDate}
+              endDate={checkOutDate}
+              placeholderText="Add dates"
             />
           </div>
           <div className="search-section">
             <label>Check out</label>
-            <input
-              type="text"
-              name="checkOutDate"
-              placeholder="Add dates"
-              onChange={() => {}}
+            <ReactDatePicker
+              selected={checkOutDate}
+              onChange={(date) => setCheckOutDate(date)}
+              selectsEnd
+              startDate={checkInDate}
+              endDate={checkOutDate}
+              minDate={checkInDate}
+              placeholderText="Add dates"
             />
           </div>
           <div className="search-section" ref={guestDropdownRef}>
@@ -192,29 +227,33 @@ const LocationFilter = () => {
               </div>
             )}
           </div>
-          <div className="search_button">
+          <div className="search_button" onClick={handleSearch}>
             <SearchIcon />
           </div>
         </div>
-        <div className="header-right-container">
-        <p>{userInfo ? `Welcome ${userInfo.name}` : "Become a host" }</p>
+        <div className="locations-header-right">
+          <p onClick={handleBecomeHost}>Become a host</p>
           <LanguageIcon />
-          <div className="header-dropdowns">
-            <MenuIcon className="menu-icon" />
+          <div className="locations-header-dropdowns">
+            <MenuIcon className="locations-menu-icon" />
             <div className={`dropdown ${dropdownVisible ? 'dropdown-visible' : ''}`}>
-              <Avatar className="avatar-button" onClick={toggleDropdown} />
-              <div className="dropdown-content" ref={dropdownRef}>
-                {userInfo ? (
-                  <>
-                    <span>Account</span>
-                    <span>Log out</span>
-                  </>
-                ) : (
-                  <>
-                    <span onClick={openModalHandle}>Log in</span>
-                  </>
-                )}
-              </div>
+              <Avatar className='locations-avatar' onClick={toggleDropdown} />
+              {dropdownVisible && (
+                <div className="locations-dropdown-content" ref={dropdownRef}>
+                  {userInfo ? (
+                    <>
+                      {userInfo.hasReservations && (
+                        <span onClick={handleViewReservations}>View Reservations</span>
+                      )}
+                      <span onClick={handleLogout}>Log out</span>
+                    </>
+                  ) : (
+                    <div className='locations-login-dropdown'>
+                      <span onClick={handleLoginClick}>Log in</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -223,4 +262,4 @@ const LocationFilter = () => {
   );
 };
 
-export default LocationFilter;
+export default LocationHeader;

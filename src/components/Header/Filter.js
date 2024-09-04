@@ -3,7 +3,8 @@ import axios from 'axios';
 import './Filter.css';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 import SearchIcon from "@mui/icons-material/Search";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Filter = () => {
   const location = useLocation();
@@ -16,8 +17,14 @@ const Filter = () => {
 
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
 
-   // Fetch location names in our dropdown
+  const guestDropdownRef = useRef(null);
+  const checkInRef = useRef(null);
+  const checkOutRef = useRef(null);
+
+  // Fetch location names for our dropdown
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -31,32 +38,24 @@ const Filter = () => {
     fetchLocations();
   }, []);
 
-// Update selectedLocation based on URL changes
-useEffect(() => {
-  const searchParams = new URLSearchParams(location.search);
-  const locationName = searchParams.get('locationName') || "";
-  setSelectedLocation(locationName);
-}, [location]);
+  // Update selectedLocation based on URL changes
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const locationName = searchParams.get('locationName') || "";
+    setSelectedLocation(locationName);
+  }, [location]);
 
-  
-  //Fetch all locations page 
   const handleLocationChange = (e) => {
     const selectedValue = e.target.value;
     if (selectedValue === "local") {
-    navigate ('/locations');
+      navigate('/locations');
     } else if (selectedValue) {
       navigate(`/listings?locationName=${encodeURIComponent(selectedValue)}`);
     }
   };
 
-  const handleChange = (e) => {
-    setSelectedLocation(e.target.value);
-  };
-
-  const guestDropdownRef = useRef(null);
- 
   const handleSearch = () => {
-   
+    navigate(`/listings?locationName=${encodeURIComponent(selectedLocation)}&checkInDate=${encodeURIComponent(checkInDate?.toISOString())}&checkOutDate=${encodeURIComponent(checkOutDate?.toISOString())}&adults=${adults}&children=${children}`);
   };
 
   const toggleGuestOptions = () => {
@@ -65,24 +64,22 @@ useEffect(() => {
 
   const handleGuestsChange = (type, operation) => {
     if (type === 'adults') {
-      if (operation === 'increment') {
-        setAdults(adults + 1);
-      } else if (operation === 'decrement' && adults > 0) {
-        setAdults(adults - 1);
-      }
+      setAdults(prev => (operation === 'increment' ? prev + 1 : (prev > 0 ? prev - 1 : prev)));
     } else if (type === 'children') {
-      if (operation === 'increment') {
-        setChildren(children + 1);
-      } else if (operation === 'decrement' && children > 0) {
-        setChildren(children - 1);
-      }
+      setChildren(prev => (operation === 'increment' ? prev + 1 : (prev > 0 ? prev - 1 : prev)));
     }
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (guestDropdownRef.current && !guestDropdownRef.current.contains(event.target)) {
+      if (
+        guestDropdownRef.current && !guestDropdownRef.current.contains(event.target) &&
+        checkInRef.current && !checkInRef.current.contains(event.target) &&
+        checkOutRef.current && !checkOutRef.current.contains(event.target)
+      ) {
         setShowGuestOptions(false);
+        setCheckInDate(null); // Reset check-in date
+        setCheckOutDate(null); // Reset check-out date
       }
     };
 
@@ -93,45 +90,50 @@ useEffect(() => {
   }, []);
 
   const totalGuests = adults + children;
+
   return (
-    <div className="filter-container" >
+    <div className="filter-container" style={{ backgroundColor: filterBackground }}>
       <div className="search-bar">
         <div className="search-section">
-          <label>Hotels</label>
+          <label htmlFor="location">Locations</label>
           <select
+            id="location"
             name="location"
             className="select-style"
+            value={selectedLocation}
             onChange={handleLocationChange}
           >
-            <option value="">Select Hotel</option>
+            <option value="">Select a Location</option>
             <option value="local">All Locations</option>
             {locations.map((location) => (
-          <option key={location._id} value={location.locationName}>
-            {location.locationName}
-          </option>
-        ))}
+              <option key={location._id} value={location.locationName}>
+                {location.locationName}
+              </option>
+            ))}
           </select>
         </div>
-        <div className="search-section">
-          <label>Check in</label>
-          <input
-            type="text"
-            name="checkInDate"
-            placeholder="Add dates"
-            onChange={handleChange}
+        <div className="search-section" ref={checkInRef}>
+          <label htmlFor="checkInDate">Check in</label>
+          <DatePicker
+            id="checkInDate"
+            selected={checkInDate}
+            onChange={(date) => setCheckInDate(date)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select date"
           />
         </div>
-        <div className="search-section">
-          <label>Check out</label>
-          <input
-            type="text"
-            name="checkOutDate"
-            placeholder='Add dates'
-            onChange={handleChange}
+        <div className="search-section" ref={checkOutRef}>
+          <label htmlFor="checkOutDate">Check out</label>
+          <DatePicker
+            id="checkOutDate"
+            selected={checkOutDate}
+            onChange={(date) => setCheckOutDate(date)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select date"
           />
         </div>
-        <div className="search-section " ref={guestDropdownRef}>
-          <label >Guests</label>
+        <div className="search-section" ref={guestDropdownRef}>
+          <label>Guests</label>
           <span onClick={toggleGuestOptions} className="total-guests">{totalGuests} Guests</span>
           {showGuestOptions && (
             <div className="guests-dropdown">

@@ -1,4 +1,4 @@
-/* Main container for the location details */
+/* Styles for the location details */
 .location-details-container {
   max-width: 1750px;
   width: calc(100% - 350px);
@@ -11,7 +11,7 @@
   width: 100%;
 }
 
-/* Header styles for the location details */
+/* Header section styles for the location details */
 .details-header {
   max-width: 1120px;
   text-align: left;
@@ -35,14 +35,14 @@
   gap: 10px;
 }
 
+.main-image {
+  grid-column: 1/2;
+}
+
 .small-images-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-}
-
-.main-image {
-  grid-column: 1/2;
 }
 
 .main-image img,
@@ -79,7 +79,7 @@
   border-radius: 0 8px 0 0;
 }
 
-/* Styles for the content-container*/
+/* Styles for the content layout*/
 .content-container {
   display: grid;
   grid-template-columns: 6fr 4fr;
@@ -274,104 +274,13 @@
   background-color: #0056b3;
 }
 
-/* Booking calendar section */
-.booking-calendar-section {
-  width: 100%;
-  max-height: 452px;
-  margin-bottom: 32px;
-}
-
-.booking-calendar-section h2 {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
-  text-align: left;
-}
-
-.booking-calendar-section p {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #6b7280;
-  margin-bottom: 16px;
-  text-align: left;
-}
-
-.booking-calendar {
-  display: flex;
-  gap: 32px;
-  overflow: hidden;
-}
-
-.month {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.month h3 {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 28px;
-}
-
-.weekdays,
-.days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 8px;
-  width: 100%;
-}
-
-.weekdays span {
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 16px;
-  align-items: center;
-}
-
-.days span {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  color: #d1d5db;
-  margin-bottom: 8px;
-}
-
-.weekdays span,
-.days span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-}
-
-.days span.active {
-  background-color: #000;
-  color: #fff;
-  border-radius: 50%;
-}
-
-.clear-dates-button {
-  margin-top: 16px;
-  padding: 8px 16px;
-  background-color: #ff385c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.clear-dates-button:hover {
-  background-color: #ff6176;
-}
-
 /* Styles for the right column */
 .right-column {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
+  align-items: end;
+
 }
 /* Styles for the reservation section */
 .reservation-card {
@@ -515,6 +424,7 @@
   border-radius: 4px;
 }
 
+/* Styles for the review section */
 .review-section {
   margin-top: 40px;
   width: 100%;
@@ -593,15 +503,15 @@
 
 .pricing-details {
   display: flex;
-  align-items: center; /* Align items vertically centered */
+  align-items: center; 
 }
 
 .rate, .nights, .total {
-  margin-right: 5px; /* Adjust spacing as needed */
+  margin-right: 5px; 
 }
 
 .nights {
-  margin: 0 10px; /* Add space around the number of nights */
+  margin: 0 10px; 
 }
 
 .total {
@@ -614,4 +524,104 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+}
+
+.date-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.booking-info label{
+display:flex;
+margin: 10px;
+}
+
+/* booking calendar section */
+.booking-calendar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.booking-calendar-section h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.booking-calendar-section span {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.booking-calendar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+}
+
+.booking-calendar p{
+margin-bottom: 15px;
+
+}
+
+.date-picker {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.date-picker p {
+  text-align: center;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.clear-dates {
+  margin-top: 20px;
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.react-calendar {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.react-calendar__navigation button {
+  background: transparent;
+  border: none;
+  color: #333;
+}
+
+.react-calendar__month-view__days__day {
+  color: #333;
+}
+
+.react-calendar__tile {
+  border-radius: 0;
+}
+
+.react-calendar__tile--now {
+  background: #333;
+  color: #fff;
+}
+
+.react-calendar__tile--active {
+  background: #007bff;
+  color: #fff;
+}
+
+.react-calendar__tile--hover {
+  background: #f0f0f0;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  color: #333;
 }

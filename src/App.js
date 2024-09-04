@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import "./App.css";
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from './actions/userActions';
 import DiscoverExperiences from "./components/Home/DiscoverExperiences";
 import HeroBanner from "./components/Home/HeroBanner";
@@ -12,12 +12,16 @@ import ProfileSection from "./components/Header/ProfileSection";
 import QuestionsAboutHosting from "./components/Home/QuestionsAboutHosting";
 import FutureGetaways from "./components/Home/FutureGetaways";
 import Layout from "./components/Footer/Layout";
-import Listing from './components/Listing/Listing';
-import LoginPage from "./components/Admin/LoginPage";
-import CreateListings from "./components/Admin/CreateListings";
-import ListingsPage from "./components/ListingsPage";
-import LocationFilter from './components/LocationPage/LocationFilter';
+import LoginPage from "./components/UserLogin/LoginPage";
+import AdminCreateListing from "./components/Admin/AdminCreateListing";
+import ListingsPage from "./components/ListingsPage/ListingsPage";
+import LocationHeader from './components/LocationPage/LocationHeader';
 import LocationCards from './components/LocationPage/LocationCards';
+import Reservations from './components/Reservations';
+import ViewListings from './components/Admin/AdminViewListings';
+import AdminViewReservations from './components/Admin/AdminViewReservations';
+import LocationDetails from './components/LocationDetails/LocationDetails';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +58,7 @@ function App() {
           path="/locations" 
           element={
             <>
-              <LocationFilter />
+              <LocationHeader />
               <LocationCards />
             </>
           } 
@@ -64,7 +68,7 @@ function App() {
           path="/listings" 
           element={
             <>
-              <LocationFilter />
+              <LocationHeader />
               <ListingsPage />
             </>
           } 
@@ -72,17 +76,35 @@ function App() {
 
         <Route 
           path="/location-details/:id" 
-          element={<Listing />} 
+          element={<LocationDetails />} 
         />
         
         <Route 
-          path="/login" 
+          path="/admin/login" 
           element={<LoginPage />} 
         />
         
+
         <Route 
-          path="/createlisting" 
-          element={<CreateListings />} 
+          path="/view-reservations" 
+          element={<Reservations />} 
+        />
+
+{/* Admin Section */}
+
+        <Route 
+          path="/admin/view-listings" 
+          element={<ViewListings />} 
+        />
+
+        <Route 
+          path="/admin/view-reservations" 
+          element={<AdminViewReservations />} 
+        />    
+
+        <Route 
+          path="/admin/create-listing" 
+          element={<AdminCreateListing />} 
         />
       </Routes>
     </div>

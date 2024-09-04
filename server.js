@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
@@ -197,20 +198,20 @@ app.get("/location-details/:id", async (req, res) => {
 });
 
 // Login route
-app.post("/login", async (req, res) => {
+app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
-
     if (user && user.password === password) {
-      res.json({ message: "Login successful", user });
+      res.json({ message: 'Login successful' });
     } else {
-      res.status(401).json({ message: "Invalid credentials" });
+      res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
+
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

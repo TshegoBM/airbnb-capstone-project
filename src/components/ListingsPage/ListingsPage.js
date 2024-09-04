@@ -51,9 +51,9 @@ const ListingsPage = () => {
 
   return (
     <div className="listings-page">
-      <h1 className="listings-header">
-        {listings.length} Stay(s) in {locationName}
-      </h1>
+      <p className="listings-header">
+        {listings.length} stays in {locationName}
+      </p>
       <div className="listings-container">
         {listings.map((listing) => (
           <div
@@ -63,7 +63,7 @@ const ListingsPage = () => {
             style={{ cursor: "pointer" }}
           >
             <img
-              src={listing.img}
+              src={listing.img0}
               alt={listing.title}
               className="listing-image"
             />

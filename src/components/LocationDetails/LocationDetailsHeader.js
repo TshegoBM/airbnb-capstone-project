@@ -3,28 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
+import { logout } from '../../actions/userActions';
 import { Avatar } from '@mui/material';
-import { openModal } from '../../actions/modalAction';
 import './LocationDetailsHeader.css';
 
 const LocationDetailsHeader = () => {
-  const dispatch = useDispatch();
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dispatch = useDispatch();
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  
+  // Initialize userLogin and destructure userInfo
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const openModalHandle = () => {
-    navigate('/login');  // Redirect to login page
-    setDropdownVisible(false);
-  };
-
+  // Toggle dropdown visibility
   const toggleDropdown = (e) => {
     e.stopPropagation();
-    setDropdownVisible(!dropdownVisible);
+    console.log("Dropdown toggled:", !dropdownVisible);
+    setDropdownVisible(prev => !prev);
   };
 
+  // Handle click outside of dropdown to close it
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setDropdownVisible(false);
@@ -37,6 +37,17 @@ const LocationDetailsHeader = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // Handle logout action
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
+
+  const handleViewReservations = () => {
+    navigate('/reservations');
+    setDropdownVisible(false);
+  };
 
   return (
     <div className="location-details-header-container">
@@ -54,7 +65,7 @@ const LocationDetailsHeader = () => {
           <p>Online Experiences</p>
         </div>
         <div className="location-details-header-right">
-          <p>{userInfo ? `Welcome ${userInfo.name}` : "Become a host" }</p>
+          <p>{userInfo && userInfo.name ? `Welcome ${userInfo.name}` : "Become a host"}</p>
           <LanguageIcon />
           <div className="location-details-header-dropdowns">
             <MenuIcon className="location-details-menu-icon" />
@@ -63,17 +74,17 @@ const LocationDetailsHeader = () => {
                 dropdownVisible ? 'location-details-dropdown-visible' : ''
               }`}
             >
-              <Avatar className="location-details-dropbtn" onClick={toggleDropdown} />
+              <Avatar className="location-details-avatar-button" onClick={toggleDropdown} />
               <div className="location-details-dropdown-content" ref={dropdownRef}>
                 {userInfo ? (
                   <>
-                    <span>Account</span>
-                    <span>Log out</span>
+                    {userInfo.hasReservations && (
+                      <span onClick={handleViewReservations}>View Reservations</span>
+                    )}
+                    <span onClick={handleLogout}>Log out</span>
                   </>
                 ) : (
-                  <>
-                    <span onClick={openModalHandle}>Log in</span>
-                  </>
+                  <span onClick={() => navigate('/admin/login')}>Log in</span>
                 )}
               </div>
             </div>
