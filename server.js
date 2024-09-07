@@ -200,16 +200,24 @@ app.get("/location-details/:id", async (req, res) => {
 // Login route
 app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
+
   try {
+    // Find the user by username
     const user = await User.findOne({ username });
-    if (user && user.password === password) {
-      res.json({ message: 'Login successful' });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    // Compare plain text passwords
+    if (user.password === password) {
+      const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.json({ token, user });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
+    res.status(500).json({ message: 'Server error' });
+  }  
 });
 
 

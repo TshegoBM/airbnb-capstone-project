@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LanguageIcon from '@mui/icons-material/Language';
 import MenuIcon from '@mui/icons-material/Menu';
-import { logout } from '../../actions/userActions';
 import { Avatar } from '@mui/material';
 import './LocationDetailsHeader.css';
 
@@ -13,9 +12,15 @@ const LocationDetailsHeader = () => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   
-  // Initialize userLogin and destructure userInfo
+// Get user login state from Redux store
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+// Function to handle login redirect
+  const openModalHandle = () => {
+    navigate('/admin/login'); // Redirect to login page
+    setDropdownVisible(false);
+  };
 
   // Toggle dropdown visibility
   const toggleDropdown = (e) => {
@@ -39,11 +44,12 @@ const LocationDetailsHeader = () => {
   }, []);
 
   // Handle logout action
-  const handleLogout = () => {
-    dispatch(logout());
+  const logoutHandler = () => {
+    dispatch({ type: 'USER_LOGOUT' });
     navigate('/');
   };
 
+ // Handle view reservations redirect
   const handleViewReservations = () => {
     navigate('/reservations');
     setDropdownVisible(false);
@@ -78,14 +84,14 @@ const LocationDetailsHeader = () => {
               <div className="location-details-dropdown-content" ref={dropdownRef}>
                 {userInfo ? (
                   <>
-                    {userInfo.hasReservations && (
-                      <span onClick={handleViewReservations}>View Reservations</span>
-                    )}
-                    <span onClick={handleLogout}>Log out</span>
-                  </>
-                ) : (
-                  <span onClick={() => navigate('/admin/login')}>Log in</span>
-                )}
+                  <span onClick={() => navigate('/reservations')}>Reservations</span> {/* Display "Reservations" when logged in */}
+                  <span onClick={logoutHandler}>Log out</span> {/* Log out */}
+                </>
+              ) : (
+                <>
+                  <span onClick={openModalHandle}>Log in</span> {/* Display "Log in" when not logged in */}
+                </>
+              )}
               </div>
             </div>
           </div>

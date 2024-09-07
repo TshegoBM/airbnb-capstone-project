@@ -1,10 +1,17 @@
 .experiences-container {
-  padding: 40px 80px;
-  text-align: center;
-  gap: 48px;
-  max-width: 1800px;
-  height: 720px;
-}
+    padding: 40px 80px;
+    text-align: center;
+    gap: 48px;
+  
+    height: 720px;
+    margin: 0 auto; /* Center horizontally */
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: left; /* Center items horizontally */
+  }
+
 
 .experiences-container h2 {
   text-align: left;
@@ -12,12 +19,12 @@
   font-size: 36px;
   line-height: 44px;
   font-weight: 500;
-  margin-bottom: 50px;
 }
 
 .experiences-row {
   display: flex;
   justify-content: space-between;
+  
   gap: 24px;
 }
 
